@@ -1,0 +1,61 @@
+{
+    "name": "<%= name %>",
+    "publisher": "<%= publisher %>",
+    "keywords": [
+        "cloudide",
+        "plugin"
+    ],
+    "version": "0.0.1",
+    "license": "SEE LICENSE IN LICENSE",
+    "description": "<%= description %>",
+    "icon": "resources/icons/logo.png",
+    "files": [
+        "src"
+    ],
+    "activationEvents": [<% if(type == 'generic') { %>
+        "*"
+        <% } else { %> 
+        "onCommand:sayHello"<% } %>
+    ],<% if(type == 'backend') { %>
+    "contributes": {
+		"commands": [
+			{
+				"command": "plugin.sayHello",
+				"title": "Say Hello"
+			}
+		]
+	},<% } %> 
+    "devDependencies": {
+        "@cloudide/plugin": "0.0.2",
+        "rimraf": "2.6.2",
+        "ts-loader": "^6.0.4",
+        "typescript": "^2.9.2",
+        "typescript-formatter": "7.2.2"<% if(type == 'generic') { %>,
+        "webpack": "^4.39.2",
+        "webpack-cli": "^3.3.7"
+        <% } %>
+    },
+    "scripts": {
+        "prepare": "npm run clean && npm run build",
+        "clean": "rimraf dist",
+        "format-code": "tsfmt -r",
+        "watch": "tsc -watch",
+        "compile": "tsc",<% if(type == 'generic') { %>
+        "build": "npm run format-code && npm run compile && webpack",
+        "build-browser": "webpack --config webpack.config.js"<% } else { %>
+        "build": "npm run format-code && npm run compile"<% } %>
+    },
+    "engines": {
+        "theiaPlugin": "next"
+    },
+    "theiaPlugin": {
+        "backend": "dist/plugin.js"
+    },<% if(type == 'generic') { %>
+    "dependencies": {
+        "@cloudide/core": "latest",
+        "@cloudide/messaging": "latest"
+    },<% } %>
+    "extensionDependencies" : [
+        "huawei-builtin.huawei-cloudide-common"
+    ]
+}

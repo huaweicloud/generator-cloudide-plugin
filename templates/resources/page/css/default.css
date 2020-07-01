@@ -1,0 +1,51 @@
+
+.plugin-body {
+    padding: 0 5px;
+    background-color: var(--theia-sideBar-background);
+}
+
+/*-----------------------------------------------------------------------------
+| button
+|----------------------------------------------------------------------------*/
+
+button.theia-button, .theia-button {
+    border: none;
+    color: var(--vscode-button-foreground);
+    background-color: var(--vscode-button-background);
+    min-width: 65px;
+    outline: none;
+    cursor: pointer;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-left: calc(var(--theia-ui-padding)*2);
+    border-radius: 1px;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 1px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px -2px rgba(0, 0, 0, 0.12);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+button.theia-button:hover,.theia-button:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+button.secondary,.theia-button.secondary {
+    color: var(--vscode-secondaryButton-foreground);
+    background-color: var(--vscode-secondaryButton-background);
+}
+
+button.secondary:hover,.theia-button.secondary:hover {
+    background-color: var(--vscode-secondaryButton-hoverBackground);
+}
+
+button.theia-button[disabled],.theia-button[disabled] {
+    opacity: 0.6;
+    color: var(--vscode-button-disabledForeground);
+    background-color: var(--vscode-button-disabledBackground);
+    cursor: not-allowed;
+}
+
+button.secondary[disabled],.theia-button.secondary[disabled] {
+    color: var(--theia-secondaryButton-disabledForeground);
+    background-color: var(--vscode-secondaryButton-disabledBackground);
+}

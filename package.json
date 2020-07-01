@@ -1,0 +1,32 @@
+{
+    "name": "@cloudide/generator-plugin",
+    "version": "1.0.0",
+    "description": "Generator of Huawei CloudIDE plugin",
+    "main": "index.js",
+    "files": [
+        "generators",
+        "templates"
+    ],
+    "scripts": {
+        "prepare": "npm run build",
+        "build": "tsfmt -r && tsc"
+    },
+    "keywords": [
+        "generator"
+    ],
+    "author": {
+        "name": "yewei",
+        "email": "yeweiasia@gmail.com"
+    },
+    "license": "SEE LICENSE IN LICENSE",
+    "dependencies": {
+        "yeoman-generator": "^4.10.1",
+        "yosay": "^2.0.2"
+    },
+    "devDependencies": {
+        "@types/yeoman-generator": "^3.1.4",
+        "@types/yosay": "^0.0.29",
+        "typescript": "^2.9.2",
+        "typescript-formatter": "7.2.2"
+    }
+}
