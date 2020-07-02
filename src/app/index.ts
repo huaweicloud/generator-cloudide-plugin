@@ -203,7 +203,7 @@ class CloudIdeGenerator extends Generator {
 
         // generate .gitignore file
         this.fs.copyTpl(
-            this.templatePath(`config/.gitignore`),
+            this.templatePath(`config/gitignore.ejs`),
             this.destinationPath(this.options.name, '.gitignore'),
             templateData);
 
