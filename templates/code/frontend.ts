@@ -1,4 +1,4 @@
-<%- include(`../common/LICENSE-${license}-HEADER`, {year: year, author: author}); %>
+<%- include(`../common/LICENSE-${license}-HEADER`, { year: year, author: author }); %>
 
 import { PluginPage, LogLevel, AbstractFrontend } from "@cloudide/core/lib/browser/plugin-api";
 import { exposable, expose } from "@cloudide/messaging";
@@ -9,6 +9,13 @@ import { exposable, expose } from "@cloudide/messaging";
  */
 @exposable
 class Frontend extends AbstractFrontend {
+
+    /**
+     * function call to the frontend will wait until init() to be resolved
+     */
+    async init(): Promise<void> {
+
+    }
 
     /**
      * Entry of your plugin backend
@@ -40,6 +47,6 @@ class Frontend extends AbstractFrontend {
 
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     PluginPage.create([Frontend]);
 });

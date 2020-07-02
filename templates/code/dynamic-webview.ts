@@ -6,6 +6,13 @@ import { exposable, expose } from "@cloudide/messaging";
 @exposable
 class MyDynamicWebveiwePageAPI extends AbstractFrontend {
 
+    /**
+     * function call to the frontend will wait until init() to be resolved
+     */
+    async init(): Promise<void> {
+        
+    }
+
     run(): void {
         this.plugin.log(LogLevel.INFO, 'dynamic webview page loaded!');
     }

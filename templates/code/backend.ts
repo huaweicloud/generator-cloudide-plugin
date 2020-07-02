@@ -1,4 +1,4 @@
-<%- include(`../common/LICENSE-${license}-HEADER`, {year: year, author: author}); %>
+<%- include(`../common/LICENSE-${license}-HEADER`, { year: year, author: author }); %>
 
 import * as cloudide from '@cloudide/plugin';
 import { exposable, expose } from "@cloudide/messaging";
@@ -10,6 +10,13 @@ import { AbstractBackend, LogLevel } from '@cloudide/core/lib/node/plugin-api';
  */
 @exposable
 export class Backend extends AbstractBackend {
+
+    /**
+     * function call to the backend will wait until init() to be resolved
+     */
+    async init(): Promise<void> {
+
+    }
 
     /**
      * Entry of your plugin backend
