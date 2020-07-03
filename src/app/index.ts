@@ -226,6 +226,9 @@ class CloudIdeGenerator extends Generator {
         const pluginTargetPath = this.destinationPath(this.options.name);
         this.npmInstall(undefined, undefined, { cwd: pluginTargetPath });
         this.log(`If an error occurs during the installation process, please try to execute command 'npm i' in the directory '${pluginTargetPath}'.`);
+        if (this.options.repository) {
+            this.spawnCommandSync('git', ['init'], { cwd: pluginTargetPath });
+        }
     }
 
     end() {
