@@ -15,7 +15,7 @@
     "activationEvents": [<% if(type == 'generic') { %>
         "*"
         <% } else { %> 
-        "onCommand:sayHello"<% } %>
+        "onCommand:plugin.sayHello"<% } %>
     ],<% if(type == 'backend') { %>
     "contributes": {
 		"commands": [
