@@ -152,7 +152,7 @@ class CloudIdeGenerator extends Generator {
         // generate license file
         this.fs.copyTpl(
             this.templatePath(`common/LICENSE-${this.options.license}`),
-            this.destinationPath(this.options.name, 'LICENSE.txt'),
+            this.destinationPath(this.options.name, 'LICENSE'),
             templateData);
 
         // generate plugin file
