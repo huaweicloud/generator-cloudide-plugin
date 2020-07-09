@@ -24,10 +24,10 @@ class CloudIdeGenerator extends Generator {
         this.option('type', { alias: 't', description: 'plugin type' });
         this.option('version', { alias: 'v', description: 'Semantic Versioning of the plugin', default: '0.0.1' });
         this.option('publisher', { alias: 'p', description: 'The publisher name' });
-        this.option('author', { alias: 'n', description: 'The plugin author' });
-        this.option('license', { alias: 'l', description: 'The plugin license' });
+        this.option('author', { alias: 'a', description: 'The plugin author' });
+        this.option('license', { alias: 'l', description: 'The plugin license', type: String });
         this.option('description', { alias: 'd', description: 'The plugin description' });
-        this.option('repository', { alias: 'r', description: 'The repository url of plugin' });
+        this.option('repository', { alias: 'r', description: 'Initializing plugin folder with git init', type: Boolean });
 
     }
 
