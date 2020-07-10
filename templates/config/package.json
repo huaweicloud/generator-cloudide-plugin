@@ -27,6 +27,7 @@
 	},<% } %> 
     "devDependencies": {
         "@cloudide/plugin": "latest",
+        "@cloudide/plugin-packager": "latest",
         "rimraf": "2.6.2",
         "ts-loader": "^6.0.4",
         "typescript": "^2.9.2",
@@ -40,7 +41,8 @@
         "clean": "rimraf dist",
         "format-code": "tsfmt -r",
         "watch": "tsc -watch",
-        "compile": "tsc",<% if(type == 'generic') { %>
+        "compile": "tsc",
+        "pack": "cloudide-pack -p",<% if(type == 'generic') { %>
         "build": "npm run format-code && npm run compile && webpack",
         "build-browser": "webpack --config webpack.config.js"<% } else { %>
         "build": "npm run format-code && npm run compile"<% } %>
