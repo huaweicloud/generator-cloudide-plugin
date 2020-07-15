@@ -8,6 +8,7 @@
     "version": "0.0.1",
     "license": "SEE LICENSE IN LICENSE",
     "description": "<%= description %>",
+    "displayName": "<%= name %>",
     "icon": "resources/icons/logo.png",
     "files": [
         "src"

@@ -4,7 +4,7 @@ import { PluginPage, LogLevel, AbstractFrontend } from "@cloudide/core/lib/brows
 import { exposable, expose } from "@cloudide/messaging";
 
 @exposable
-class MyDynamicWebveiwePageAPI extends AbstractFrontend {
+class MyDynamicWebviewPageAPI extends AbstractFrontend {
 
     /**
      * function call to the frontend will wait until init() to be resolved
