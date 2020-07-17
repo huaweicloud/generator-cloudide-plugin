@@ -232,7 +232,7 @@ class CloudIdeGenerator extends Generator {
     }
 
     end() {
-        this.log('The Plugin template is generated.');
+        this.log('Plugin project is generated successfully.');
         this.log(`If you have any problems during the process, please create an issue on github.
 (https://github.com/huaweicloud/generator-cloudide-plugin/issues/new)`);
     }

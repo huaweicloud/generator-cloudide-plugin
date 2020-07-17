@@ -30,5 +30,5 @@ class MyDynamicWebviewPageAPI extends AbstractFrontend {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-    PluginPage.create([MyDynamicWebveiwePageAPI]);
+    PluginPage.create([MyDynamicWebviewPageAPI]);
 });
