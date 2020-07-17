@@ -15,8 +15,6 @@ interface CommandLineOption {
 }
 
 class CloudIdeGenerator extends Generator {
-
-
     constructor(args: string[], opts: any) {
         super(args, opts);
         this.argument('name', { type: String, required: false, description: 'The name of the plugin' });
@@ -27,8 +25,11 @@ class CloudIdeGenerator extends Generator {
         this.option('author', { alias: 'a', description: 'The plugin author' });
         this.option('license', { alias: 'l', description: 'The plugin license', type: String });
         this.option('description', { alias: 'd', description: 'The plugin description' });
-        this.option('repository', { alias: 'r', description: 'Initializing plugin folder with git init', type: Boolean });
-
+        this.option('repository', {
+            alias: 'r',
+            description: 'Initializing plugin folder with git init',
+            type: Boolean
+        });
     }
 
     async prompting() {
@@ -49,7 +50,6 @@ class CloudIdeGenerator extends Generator {
                         name: 'Backend Only Plugin - The plugin can only run on the backend without view support.',
                         value: 'backend'
                     }
-
                 ]
             });
             opts.type = answers.type;
@@ -60,7 +60,7 @@ class CloudIdeGenerator extends Generator {
                 type: 'input',
                 name: 'name',
                 message: `What's the name of your plugin?`,
-                default: this.appname.replace(/\s+/g, '-')
+                default: this.appname.trim().replace(/\s+/g, '-')
             });
             opts.name = answers.name;
         }
@@ -69,7 +69,7 @@ class CloudIdeGenerator extends Generator {
             const answers = await this.prompt({
                 type: 'input',
                 name: 'publisher',
-                message: `Who's the publisher(your Huawei cloud account name) of your plugin?`,
+                message: `Who's the publisher(your Huawei cloud account name) of your plugin?`
             });
             opts.publisher = answers.publisher;
         }
@@ -107,7 +107,7 @@ class CloudIdeGenerator extends Generator {
             const answers = await this.prompt({
                 type: 'input',
                 name: 'description',
-                message: `What's the description of your plugin?`,
+                message: `What's the description of your plugin?`
             });
             opts.description = answers.description;
         }
@@ -127,15 +127,12 @@ class CloudIdeGenerator extends Generator {
                         value: true
                     }
                 ]
-
             });
             opts.repository = answers.repository;
         }
-
     }
 
     writing() {
-
         const generatedYear = new Date().getFullYear().toString();
 
         this.sourceRoot(__dirname + '/../../templates/');
@@ -153,79 +150,86 @@ class CloudIdeGenerator extends Generator {
         this.fs.copyTpl(
             this.templatePath(`common/LICENSE-${this.options.license}`),
             this.destinationPath(this.options.name, 'LICENSE'),
-            templateData);
+            templateData
+        );
 
         // generate plugin file
         this.fs.copyTpl(
             this.templatePath(`code/plugin.ts`),
             this.destinationPath(this.options.name, 'src/plugin.ts'),
-            templateData);
+            templateData
+        );
 
         if (this.options.type === 'generic') {
-
             // generate backend file
             this.fs.copyTpl(
                 this.templatePath(`code/backend.ts`),
                 this.destinationPath(this.options.name, 'src/node/backend.ts'),
-                templateData);
+                templateData
+            );
 
-            // start to generate frontend related files 
+            // start to generate frontend related files
             // generate frontend file
             this.fs.copyTpl(
                 this.templatePath(`code/frontend.ts`),
                 this.destinationPath(this.options.name, 'src/browser/frontend.ts'),
-                templateData);
+                templateData
+            );
 
             // generate dynamic-webview.ts
             this.fs.copyTpl(
                 this.templatePath(`code/dynamic-webview.ts`),
                 this.destinationPath(this.options.name, 'src/browser/dynamic-webview.ts'),
-                templateData);
+                templateData
+            );
 
             // generate webpack config file
             this.fs.copyTpl(
                 this.templatePath(`config/webpack.config.js`),
                 this.destinationPath(this.options.name, 'webpack.config.js'),
-                templateData);
+                templateData
+            );
 
             // copy resource files
-            this.fs.copy(this.templatePath(`resources`),
-                this.destinationPath(this.options.name, 'resources'));
-
+            this.fs.copy(this.templatePath(`resources`), this.destinationPath(this.options.name, 'resources'));
         }
-
 
         // generate package.json file
         this.fs.copyTpl(
             this.templatePath(`config/package.json`),
             this.destinationPath(this.options.name, 'package.json'),
-            templateData);
+            templateData
+        );
 
         // generate .gitignore file
         this.fs.copyTpl(
             this.templatePath(`config/gitignore.ejs`),
             this.destinationPath(this.options.name, '.gitignore'),
-            templateData);
+            templateData
+        );
 
         // generate tsfmt.json file
         this.fs.copyTpl(
             this.templatePath(`config/tsfmt.json`),
             this.destinationPath(this.options.name, 'tsfmt.json'),
-            templateData);
+            templateData
+        );
 
         // generate tsconfig.json file
         this.fs.copyTpl(
             this.templatePath(`config/tsconfig.json`),
             this.destinationPath(this.options.name, 'tsconfig.json'),
-            templateData);
-
+            templateData
+        );
     }
 
     install() {
         this.log('installing dependencies...');
         const pluginTargetPath = this.destinationPath(this.options.name);
         this.npmInstall(undefined, undefined, { cwd: pluginTargetPath });
-        this.log(`If an error occurs during the installation process, please try to execute command 'npm i' in the directory '${pluginTargetPath}'.`);
+        this.log(
+            `If an error occurs during the installation process, please try to execute command 'npm i' in the directory '${pluginTargetPath}'.`
+        );
         if (this.options.repository) {
             this.spawnCommandSync('git', ['init'], { cwd: pluginTargetPath });
         }

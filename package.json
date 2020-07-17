@@ -1,6 +1,6 @@
 {
     "name": "@cloudide/generator-plugin",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Generator of Huawei CloudIDE plugin",
     "main": "index.js",
     "files": [
@@ -9,7 +9,8 @@
     ],
     "scripts": {
         "prepare": "npm run build",
-        "build": "tsfmt -r && tsc"
+        "build": "tsfmt -r && tsc",
+        "eslint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix"
     },
     "keywords": [
         "generator"
@@ -19,6 +20,10 @@
         "email": "yeweiasia@gmail.com"
     },
     "license": "SEE LICENSE IN LICENSE",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/huaweicloud/generator-cloudide-plugin.git"
+    },
     "dependencies": {
         "yeoman-generator": "^4.10.1",
         "yosay": "^2.0.2"
@@ -26,7 +31,13 @@
     "devDependencies": {
         "@types/yeoman-generator": "^3.1.4",
         "@types/yosay": "^0.0.29",
-        "typescript": "^2.9.2",
+        "@typescript-eslint/eslint-plugin": "^3.6.1",
+        "@typescript-eslint/parser": "^3.6.1",
+        "eslint": "^7.4.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "prettier": "^2.0.5",
+        "typescript": "^3.9.6",
         "typescript-formatter": "7.2.2"
     }
 }
