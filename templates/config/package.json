@@ -31,7 +31,7 @@
         "@cloudide/plugin-packager": "latest",
         "rimraf": "2.6.2",
         "ts-loader": "^6.0.4",
-        "typescript": "^2.9.2",
+        "typescript": "^3.9.7",
         "typescript-formatter": "7.2.2"<% if(type == 'generic') { %>,
         "webpack": "^4.39.2",
         "webpack-cli": "^3.3.7"

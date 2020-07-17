@@ -1,6 +1,6 @@
 {
     "name": "@cloudide/generator-plugin",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "Generator of Huawei CloudIDE plugin",
     "main": "index.js",
     "files": [
@@ -37,7 +37,7 @@
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-prettier": "^3.1.4",
         "prettier": "^2.0.5",
-        "typescript": "^3.9.6",
+        "typescript": "^3.9.7",
         "typescript-formatter": "7.2.2"
     }
 }
