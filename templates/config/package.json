@@ -1,6 +1,7 @@
 {
     "name": "<%= name %>",
     "publisher": "<%= publisher %>",
+    "author": "<%= author %>",
     "keywords": [
         "cloudide",
         "plugin"
@@ -14,8 +15,7 @@
         "src"
     ],
     "activationEvents": [<% if(type == 'generic') { %>
-        "*"
-        <% } else { %> 
+        "*"<% } else { %> 
         "onCommand:plugin.sayHello"<% } %>
     ],<% if(type == 'backend') { %>
     "contributes": {
@@ -34,8 +34,7 @@
         "typescript": "^3.9.7",
         "typescript-formatter": "7.2.2"<% if(type == 'generic') { %>,
         "webpack": "^4.39.2",
-        "webpack-cli": "^3.3.7"
-        <% } %>
+        "webpack-cli": "^3.3.7"<% } %>
     },
     "scripts": {
         "prepare": "npm run clean && npm run build",
