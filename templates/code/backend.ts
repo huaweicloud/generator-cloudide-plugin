@@ -2,7 +2,8 @@
 
 import * as cloudide from '@cloudide/plugin';
 import { exposable, expose } from "@cloudide/messaging";
-import { AbstractBackend, LogLevel } from '@cloudide/core/lib/node/plugin-api';
+import { LogLevel } from "@cloudide/core/lib/common/plugin-common";
+import { AbstractBackend } from '@cloudide/core/lib/node/plugin-api';
 
 /**
  * Add your backend api in this class
@@ -20,7 +21,7 @@ export class Backend extends AbstractBackend {
 
     /**
      * Entry of your plugin backend
-     * In this function your can call function exposed by frontend 
+     * In this function you can call function exposed by frontend 
      */
     public async run(): Promise<void> {
         const retValue = await this.plugin.call('myplugin.page.myApi', 'this is a function call from backend');

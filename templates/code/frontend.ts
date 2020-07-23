@@ -1,6 +1,7 @@
 <%- include(`../common/LICENSE-${license}-HEADER`, { year: year, author: author }); %>
 
-import { PluginPage, LogLevel, AbstractFrontend } from "@cloudide/core/lib/browser/plugin-api";
+import { LogLevel } from "@cloudide/core/lib/common/plugin-common";
+import { PluginPage, AbstractFrontend } from "@cloudide/core/lib/browser/plugin-api";
 import { exposable, expose } from "@cloudide/messaging";
 
 /**
@@ -18,7 +19,7 @@ class Frontend extends AbstractFrontend {
     }
 
     /**
-     * Entry of your plugin backend
+     * Entry of your plugin frontend
      * In this function your can call function exposed by frontend
      */
     run(): void {

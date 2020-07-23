@@ -8,7 +8,7 @@
         "templates"
     ],
     "scripts": {
-        "prepare": "npm run build",
+        "prepare": "npm run build && npm run test",
         "build": "tsfmt -r && tsc",
         "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'test/**/*.ts'",
         "eslint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix"
