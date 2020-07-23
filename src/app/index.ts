@@ -43,11 +43,11 @@ class CloudIdeGenerator extends Generator {
                 message: `Which type of plugin do you want to create?`,
                 choices: [
                     {
-                        name: 'Generic Plugin - Both frontend and backend are fully supported.',
+                        name: 'Generic Plugin - This will enable advanced fetaures to write the plugin UI using HTML.',
                         value: 'generic'
                     },
                     {
-                        name: 'Backend Only Plugin - The plugin can only run on the backend without view support.',
+                        name: 'Backend Plugin - The plugin can run on the backend and advanced fetaures are disabled.',
                         value: 'backend'
                     }
                 ]
