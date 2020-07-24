@@ -228,11 +228,11 @@ export class Backend extends AbstractBackend {
 and calls to the exposed backend function will wait until `init()` to be resolved.
 * `public async run(): Promise<void>` - The `run` function is called after init, in this function you can call function exposed by frontend.
 * `public stop(): void` - The `stop` function is called before plugin stop, you can do some clean up actions before plugin stopped.
-* expose your own function to frontend - Just add @expose decorator to your funciton, and pass a parameter as unique identifier, which stand for this function when called using plugin.call.
+* expose your own function to frontend - Just add `@expose` decorator to your funciton, and pass a parameter as unique identifier, which stand for this function when called using plugin.call.
 
 #### Frontend Class
 The design of the frontend class is similar to that of the backend. 
-The frontend class should inherit an abstract class called AbstractFrontend and needs to be decorated with @expose, providing three methods: `init`, `run`, and `stop`.
+The frontend class should inherit an abstract class called AbstractFrontend and needs to be decorated with `@expose`, providing three methods: `init`, `run`, and `stop`.
 The usage of the three methods are quite similar to those of the backend. The only difference is that they all run in the browser environment.
 ```typescript
 /**
@@ -289,6 +289,9 @@ document.addEventListener('DOMContentLoaded', function() {
     PluginPage.create([Frontend]);
 });
 ```
+
+#### Dynamic Webview
+Comming soon...
 
 ## LICENSE
 [MIT](LICENSE)
