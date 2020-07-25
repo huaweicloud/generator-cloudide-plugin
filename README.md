@@ -28,9 +28,16 @@ This guide describes the basic running principles of plugin and describes the AP
 All of this article is based on a generic project that can be created by executing `yo @cloudide/plugin` and selecting the `generic` type plugin.  
 
 ### Basic Concepts 
-* backend: JS code running in the NodeJS environment. Actually, the backend of CloudIDE instance is a web server started with express. 
-* frontend: JS code running in the Browser environment.
-* remote call: function call exposed between the frontend and backend. 
+* **backend**: JS code running in the NodeJS environment. Actually, the backend of CloudIDE instance is a web server started with express. 
+* **frontend**: JS code running in the Browser environment.
+* **remote call**: Make a remote function call exposed between the frontend and backend.
+* **scope**: When we exposed a function in the backend or frontend, the running environment is the scope of the function.
+For the frontend, the scope is the webview page where the frontend class is located. The *viewType* of the webview is used to indicate the scope. 
+For the backend, all backend classes are restricted to the same scope called *backend*.
+When making a remote call to other scope, we should specify the scope before the identifier.
+***If no scope is specified, the backend is called by default when the frontend calls the remote function,
+and the plugin main page fronted is called by default when the backend calls the remote function.***
+For more examples, see [Dynamic Webview](#dynamic-webview). 
 
 ### Directory Structures of Plugin Project
 Once you have created a generic plugin project using the yo generator, the root directory of the plugin project contains the following directories and files: 
@@ -291,7 +298,87 @@ document.addEventListener('DOMContentLoaded', function() {
 ```
 
 #### Dynamic Webview
-Comming soon...
+In some scenarios, we need to dynamically create views on the CloudIDE workbench. 
+The feature of *dynamic webview* provides an approach to create webview programmatically in frontend.
+The dynamic views, plugin backend, and plugin main view have the ability to expose function to each other.
+
+Dynamic webview can be added in 5 steps:
+* step 1: Create a dynamic webview html page in `resources/page/` just like the default dynamic-webivew.html. 
+You can copy the dynamic-webview.html file and rename it as you like. For example, `your-dynamic-webviw.html`
+* step 2: Create your frontend file in `src/browser/` just like the default dynamic-webview.ts.
+You can copy the dynamic-webview.ts file and rename it as you like. For example, `your-dynamic-webview.ts`
+* step 3: Add an entry to the `webpack.config.js`.
+```javascript
+module.exports = {
+    entry: {
+        'page/dist/index': './src/browser/frontend.ts',
+        'page/dist/dynamic-webview-index': './src/browser/dynamic-webview.ts',
+        'page/dist/your-dynamic-webview': './src/browser/your-dynamic-webviw.ts'
+    },
+    ...
+};
+```
+* step 4: Change the src attribute to your compiled js entry.
+```html
+<head>
+    ...
+	<script type="text/javascript" src="dist/your-dynamic-webviw.js" crossorigin="anonymous"></script>
+    ...
+</head>
+```
+* setp 5: Call `Plugin.createDynamicWebview()` to create the dynamic webview, `opts` passed to the
+create function is a type of `WebviewOptions`, you should change the properties to your dynamic view.
+```typescript
+    run(): void {
+       ...
+        const dynamicWebviewOpts = {
+                viewType: 'your-dynamic-webview',
+                title: 'your dynamic webview',
+                targetArea: 'main',
+                iconPath: 'resources/icons/plugin.svg',
+                viewUrl: 'local:resources/page/your-dynamic-webview.html',
+                preserveFocus: false,
+                extData: { data: 'my "extra" data' }
+        };
+        this.plugin.createDynamicWebview(dynamicWebviewOpts, true);
+       ...
+    }
+```
+Once you've done the above, you can easily complete frontend development using HTML5 page,
+and then we'll go into the details of how each webview and the backend call each other. 
+
+As shown in the following figure, assume that there are three webviews, two of which are dynamic webviews. 
+In each webview, a frontend class exposes a method. The method identifiers are *funcA*, *funcB*, and *funcC*. 
+Three backend classes expose a method. The method identifiers are *funcD*, *funcE*, and *funcF*. 
+```bash
+(plugin main webview)                            (dynamic webview)              (dynamic webview)
+(viewType: main)                                 (viewType: view1)              (viewType: view2)
+(exposed function id: funcA)                     (exposed function id: funcB)   (exposed function id: funcC)
++------------------+                             +------------------+           +------------------+
+| +----------+     | plugin.call('main::funcA')  | +----------+     |           | +----------+     |
+| |          |     +<----------------------------+ |          |     |           | |          |     |
+| | frontend | ... |                             | | frontend | ... |           | | frontend | ... |
+| |          |     | plugin.call('view1::funcB') | |          |     |           | |          |     |
+| +----------+     +---------------------------->+ +----------+     |           | +----------+     |
++------------------+                             +------------------+           +------------------+
+  ^                                                |       ^                             |
+  |                                                |       | plugin.call('view1::funcB') |
+  |                                                |       +-----------------------------+
+  |                                                |
+  | plugin.call('main::funcA')                     | plugin.call('backend::funcD')
+  |                                                v
++------------------------------------------------------------------------------------------------------+
+| +----------------------------+ +----------------------------+ +----------------------------+         |
+| | backend                    | | backend                    | | backend                    |         |
+| |                            | |                            | |                            | ......  |
+| | exposed function id: funcD | | exposed function id: funcE | | exposed function id: funcF |         |
+| |                            | |                            | |                            |         |
+| +----------------------------+ +----------------------------+ +----------------------------+         |
++------------------------------------------------------------------------------------------------------+
+```
+As mentioned on [Basic Concepts](#basic-concepts), each frontend or backend has its own scope. 
+The scope of frontend is its viewType, while backend classes are all *backend*.
+The remote call always return Promise, you can `await` or using `then` callback to wait the Promise to be resolved. 
 
 ## LICENSE
 [MIT](LICENSE)
