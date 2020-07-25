@@ -27,6 +27,13 @@ npm i && npm run pack
 This guide describes the basic running principles of plugin and describes the API design of the plugin core framework through examples. 
 All of this article is based on a generic project that can be created by executing `yo @cloudide/plugin` and selecting the `generic` type plugin.  
 
+### What's The Benefit
+* The plugin frontend supports pure H5 implementation, no need to learn complex IDE extension points, and the cost of getting started is extremely low.
+* The plugin supports directly calling the exposed methods between the frontend and backend, and returns Promise, without directly using postMessage for message sending.
+* Multi-view support, support for dynamically creating and destroying webviews, and direct calling of methods exposed between them.
+* Support for event subscription at the frontend.
+* Support event broadcasting between plugins.
+
 ### Basic Concepts 
 * **backend**: JS code running in the NodeJS environment. Actually, the backend of CloudIDE instance is a web server started with express. 
 * **frontend**: JS code running in the Browser environment.
