@@ -152,7 +152,7 @@ export interface WebviewOptions {
     title: string;
     /**
      * The default view area of the plugin view.
-     * Supports left ('left'), right'right', main editing area ('main'), bottom ('bottom').
+     * Supports left ('left'), right('right'), main editing area ('main'), bottom ('bottom').
      */
     targetArea: string;
     /**
@@ -247,7 +247,7 @@ and calls to the exposed backend function will wait until `init()` to be resolve
 #### Frontend Class
 The design of the frontend class is similar to that of the backend. 
 The frontend class should inherit an abstract class called AbstractFrontend and needs to be decorated with `@expose`, providing three methods: `init`, `run`, and `stop`.
-The usage of the three methods are quite similar to those of the backend. The only difference is that they all run in the browser environment.
+The usage of the three methods are quite similar to those of the backend. The only difference is that they all run in the browser environment. 
 ```typescript
 /**
  * Adding your fronted api in this class
@@ -386,6 +386,72 @@ Three backend classes expose a method. The method identifiers are *funcD*, *func
 As mentioned on [Basic Concepts](#basic-concepts), each frontend or backend has its own scope. 
 The scope of frontend is its viewType, while backend classes are all *backend*.
 The remote call always return Promise, you can `await` or using `then` callback to wait the Promise to be resolved. 
+
+#### Event Subscription/Publication
+
+#### * Event Subscription
+
+Event subscription can be performed in the frontend and backend classes. The subscription APIs in the frontend and backend classes are different.
+
+For the backend, we can use the native CloudIDE API to subscribe to events. Here is an example of events subscription at backend.
+```typescript
+@exposable
+export class Backend extends AbstractBackend {
+...
+    public async run(): Promise<void> {
+        // subscribe to file created event
+        this.context.subscriptions.push(
+            cloudide.workspace.onDidCreateFiles((event) => {
+                console.log(JSON.stringify(event));
+            })
+        );
+    }
+...
+}
+```
+
+For the frontend, we provide the different APIs for subscribing to events. 
+However, **the event object received by the frontend is not the same as the event object received by the backend because the frontend and backend are in different contexts and the `__proto__` of the object has changed.**
+```typescript
+@exposable
+class Frontend extends AbstractFrontend {
+...
+    run(): void {
+        this.plugin.subscribeEvent(EventType.CLOUDIDE_WORKSPACE_ONDIDCREATEFILES, (type, evt) => {
+            console.log(`${type}: ${JSON.stringify(evt)}`);
+        });
+    }
+...
+}
+```
+
+#### * Event Publication
+
+In some scenarios, we need to broadcast events to other plugins or subscribe to broadcast events from plugins. 
+For backend, here is the example of how to broadcast your own event.
+```typescript
+@exposable
+export class Backend extends AbstractBackend {
+...
+    public async run(): Promise<void> {
+        // fire event to other plugins, thus will broadcasting event to all plugins
+        this.plugin.fireEventToPlugins('myPlugin.myEvent', { data: 'hello world' });
+    }
+...
+}
+```
+
+For frontend:
+```typescript
+@exposable
+class Frontend extends AbstractFrontend {
+...
+    run(): void {
+        this.plugin.fireEventToPlugins('myPlugin.myEvent', { data: 'hello world' });
+    }
+...
+}
+```
 
 ## LICENSE
 [MIT](LICENSE)
