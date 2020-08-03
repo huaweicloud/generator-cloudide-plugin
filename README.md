@@ -17,7 +17,7 @@ yo @cloudide/plugin
 ```
 
 ### Build Your Plugin
-After run the following command 
+After runing the following command, a plugin file ending with `.cloudide` will be generated in the project root directory
 ```bash
 npm i && npm run pack
 ```
