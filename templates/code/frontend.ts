@@ -6,7 +6,7 @@ import { exposable, expose } from "@cloudide/messaging";
 
 /**
  * Adding your fronted api in this class
- * Using '@expose' to expose your function to frontend
+ * Using '@expose' to expose your function to backend
  */
 @exposable
 class Frontend extends AbstractFrontend {
@@ -20,7 +20,7 @@ class Frontend extends AbstractFrontend {
 
     /**
      * Entry of your plugin frontend
-     * In this function your can call function exposed by frontend
+     * In this function your can call function exposed by backend
      */
     run(): void {
         this.plugin.call('your_backend_function_identifier', 'world');
