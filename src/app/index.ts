@@ -19,12 +19,17 @@ class CloudIdeGenerator extends Generator {
         super(args, opts);
         this.argument('name', { type: String, required: false, description: 'The name of the plugin' });
 
-        this.option('type', { alias: 't', description: 'plugin type' });
-        this.option('version', { alias: 'v', description: 'Semantic Versioning of the plugin', default: '0.0.1' });
-        this.option('publisher', { alias: 'p', description: 'The publisher name' });
-        this.option('author', { alias: 'a', description: 'The plugin author' });
+        this.option('type', { alias: 't', description: 'plugin type', type: String });
+        this.option('version', {
+            alias: 'v',
+            description: 'Semantic Versioning of the plugin',
+            default: '0.0.1',
+            type: String
+        });
+        this.option('publisher', { alias: 'p', description: 'The publisher name', type: String });
+        this.option('author', { alias: 'a', description: 'The plugin author', type: String });
         this.option('license', { alias: 'l', description: 'The plugin license', type: String });
-        this.option('description', { alias: 'd', description: 'The plugin description' });
+        this.option('description', { alias: 'd', description: 'The plugin description', type: String });
         this.option('repository', {
             alias: 'r',
             description: 'Initializing plugin folder with git init',
