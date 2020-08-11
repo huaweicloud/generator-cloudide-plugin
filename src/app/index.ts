@@ -33,7 +33,7 @@ class CloudIdeGenerator extends Generator {
         this.option('repository', {
             alias: 'r',
             description: 'Initializing plugin folder with git init',
-            type: Boolean
+            type: String
         });
     }
 
@@ -125,11 +125,11 @@ class CloudIdeGenerator extends Generator {
                 choices: [
                     {
                         name: 'NO',
-                        value: false
+                        value: 'NO'
                     },
                     {
                         name: 'YES',
-                        value: true
+                        value: 'YES'
                     }
                 ]
             });
@@ -235,7 +235,7 @@ class CloudIdeGenerator extends Generator {
         this.log(
             `If an error occurs during the installation process, please try to execute command 'npm i' in the directory '${pluginTargetPath}'.`
         );
-        if (this.options.repository) {
+        if (this.options.repository === 'YES') {
             this.spawnCommandSync('git', ['init'], { cwd: pluginTargetPath });
         }
     }
