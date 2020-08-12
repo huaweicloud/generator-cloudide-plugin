@@ -3,7 +3,7 @@
 import * as cloudide from '@cloudide/plugin';<% if(type == 'generic') { %>
 import { WebviewOptions } from "@cloudide/core/lib/common/plugin-common";
 import { Plugin } from '@cloudide/core/lib/node/plugin-api';
-import { Backend } from './node/backend'
+import { Backend } from './node/backend';
 
 /**
  * Plugin activation entry point, this function is called when plugin is loaded.
