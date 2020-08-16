@@ -47,6 +47,7 @@ export function start(context: cloudide.ExtensionContext) {
 export function stop(context: cloudide.ExtensionContext) {
     Plugin.getInstance().stop();
 }
+
 <% } else { %>
     
 /**
@@ -71,4 +72,5 @@ export function start(context: cloudide.ExtensionContext) {
 export function stop(context: cloudide.ExtensionContext) {
     
 }
+
 <% } %>
