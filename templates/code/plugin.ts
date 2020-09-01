@@ -33,11 +33,11 @@ export function start(context: cloudide.ExtensionContext) {
      */
     context.subscriptions.push(
         cloudide.commands.registerCommand(opts.title, () => {
-            Plugin.createOrShow(context, opts, backends);
+            Plugin.create(context, opts, backends);
         })
     );
 
-    Plugin.createOrShow(context, opts, backends);
+    Plugin.create(context, opts, backends);
 }
 
 /**
