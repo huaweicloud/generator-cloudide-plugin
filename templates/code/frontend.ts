@@ -1,8 +1,8 @@
 <%- include(`../common/LICENSE-${license}-HEADER`, { year: year, author: author }); %>
 
-import { LogLevel } from "@cloudide/core/lib/common/plugin-common";
-import { PluginPage, AbstractFrontend } from "@cloudide/core/lib/browser/plugin-api";
-import { exposable, expose } from "@cloudide/messaging";
+import { LogLevel } from '@cloudide/core/lib/common/plugin-common';
+import { PluginPage, AbstractFrontend } from '@cloudide/core/lib/browser/plugin-api';
+import { exposable, expose } from '@cloudide/messaging';
 
 /**
  * Adding your fronted api in this class

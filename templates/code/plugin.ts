@@ -1,7 +1,7 @@
 <%- include(`../common/LICENSE-${license}-HEADER`, {year: year, author: author}); %>
 
 import * as cloudide from '@cloudide/plugin';<% if(type == 'generic') { %>
-import { WebviewOptions } from "@cloudide/core/lib/common/plugin-common";
+import { WebviewOptions } from '@cloudide/core/lib/common/plugin-common';
 import { Plugin } from '@cloudide/core/lib/node/plugin-api';
 import { Backend } from './node/backend';
 
