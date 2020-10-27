@@ -1,0 +1,6 @@
+{
+    "plugin.index.title": "Huawei CloudIDE demo plugin main page",
+    "plugin.index.description": "This is the plugin frontend page",
+    "plugin.dynamicview.title": "Huawei CloudIDE demo plugin dynamic webview page",
+    "plugin.dynamicview.description": "This is the plugin frontend page created dynamically"
+}

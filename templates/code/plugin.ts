@@ -12,11 +12,12 @@ export function start(context: cloudide.ExtensionContext) {
 
     const opts: WebviewOptions = {
         viewType: 'view_type_of_your_plugin_view',
-        title: 'title_of_your_plugin_view',
+        title: '%plugin.index.title%',
         targetArea: 'right',
         iconPath: 'resources/icons/plugin.svg',
-        viewUrl: 'local:resources/page/index.html',
-        preserveFocus: true
+        viewUrl: 'local:resources/page/index.<% if( engineOfTemplate === 'ejs' ) { %>ejs<% } else if( engineOfTemplate === 'pug' ) { %>pug<% } else { %>html<% } %>',
+        preserveFocus: true,
+        templateEngine: <% if( engineOfTemplate === 'ejs' ) { %>'ejs'<% } else if( engineOfTemplate === 'pug' ) { %>'pug'<% } else { %>undefined<% } %>
     };
 
     /**

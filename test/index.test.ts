@@ -8,6 +8,7 @@ describe('test generate project', () => {
     it('generate generic project', (done: Done) => {
         const promptsAnswer = {
             type: 'generic',
+            engine: 'none',
             publisher: 'tester',
             author: 'tester',
             license: 'MIT',

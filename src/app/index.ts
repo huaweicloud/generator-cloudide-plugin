@@ -3,6 +3,7 @@ import yosay = require('yosay');
 
 interface CommandLineOption {
     type?: string;
+    engineOfTemplate?: string;
     name?: string;
     version?: string;
     publisher?: string;
@@ -20,6 +21,7 @@ class CloudIdeGenerator extends Generator {
         this.argument('name', { type: String, required: false, description: 'The name of the plugin' });
 
         this.option('type', { alias: 't', description: 'plugin type', type: String });
+        this.option('engineOfTemplate', { alias: 'e', description: 'template engine for plugin view', type: String });
         this.option('version', {
             alias: 'v',
             description: 'Semantic Versioning of the plugin',
@@ -58,6 +60,30 @@ class CloudIdeGenerator extends Generator {
                 ]
             });
             opts.type = answers.type;
+        }
+
+        if (opts.type === 'generic' && !opts.engineOfTemplate) {
+            const answers = await this.prompt({
+                type: 'list',
+                name: 'engineOfTemplate',
+                message: `Which template engine do you want to enable?`,
+                choices: [
+                    {
+                        name:
+                            'None - No template engine is enabled, only html tag can be supported, i18n in plugin page will not be supported.',
+                        value: 'none'
+                    },
+                    {
+                        name: 'EJS - Enable EJS template engine for plugin page.',
+                        value: 'ejs'
+                    },
+                    {
+                        name: 'Pug - Enable Pug template engine for plugin page.',
+                        value: 'pug'
+                    }
+                ]
+            });
+            opts.engineOfTemplate = answers.engineOfTemplate;
         }
 
         if (!opts.name) {
@@ -144,6 +170,7 @@ class CloudIdeGenerator extends Generator {
         const templateData = {
             year: generatedYear,
             type: this.options.type,
+            engineOfTemplate: this.options.engineOfTemplate,
             name: this.options.name,
             publisher: this.options.publisher,
             author: this.options.author,
@@ -197,12 +224,63 @@ class CloudIdeGenerator extends Generator {
 
             // copy resource files
             this.fs.copy(this.templatePath(`resources`), this.destinationPath(this.options.name, 'resources'));
+            if (this.options.engineOfTemplate === 'ejs') {
+                this.fs.delete(this.destinationPath(this.options.name, 'resources/page/html'));
+                this.fs.delete(this.destinationPath(this.options.name, 'resources/page/pug'));
+                this.fs.move(
+                    this.destinationPath(this.options.name, 'resources/page/ejs/index.ejs'),
+                    this.destinationPath(this.options.name, 'resources/page/index.ejs')
+                );
+                this.fs.move(
+                    this.destinationPath(this.options.name, 'resources/page/ejs/dynamic-webview.ejs'),
+                    this.destinationPath(this.options.name, 'resources/page/dynamic-webview.ejs')
+                );
+                this.fs.delete(this.destinationPath(this.options.name, 'resources/page/ejs'));
+            } else if (this.options.engineOfTemplate === 'pug') {
+                this.fs.delete(this.destinationPath(this.options.name, 'resources/page/html'));
+                this.fs.delete(this.destinationPath(this.options.name, 'resources/page/ejs'));
+                this.fs.move(
+                    this.destinationPath(this.options.name, 'resources/page/pug/index.pug'),
+                    this.destinationPath(this.options.name, 'resources/page/index.pug')
+                );
+                this.fs.move(
+                    this.destinationPath(this.options.name, 'resources/page/pug/dynamic-webview.pug'),
+                    this.destinationPath(this.options.name, 'resources/page/dynamic-webview.pug')
+                );
+                this.fs.delete(this.destinationPath(this.options.name, 'resources/page/pug'));
+            } else {
+                this.fs.delete(this.destinationPath(this.options.name, 'resources/page/pug'));
+                this.fs.delete(this.destinationPath(this.options.name, 'resources/page/ejs'));
+                this.fs.move(
+                    this.destinationPath(this.options.name, 'resources/page/html/index.html'),
+                    this.destinationPath(this.options.name, 'resources/page/index.html')
+                );
+                this.fs.move(
+                    this.destinationPath(this.options.name, 'resources/page/html/dynamic-webview.html'),
+                    this.destinationPath(this.options.name, 'resources/page/dynamic-webview.html')
+                );
+                this.fs.delete(this.destinationPath(this.options.name, 'resources/page/html'));
+            }
         }
 
         // generate package.json file
         this.fs.copyTpl(
             this.templatePath(`config/package.json`),
             this.destinationPath(this.options.name, 'package.json'),
+            templateData
+        );
+
+        // generate package.nls.json file
+        this.fs.copyTpl(
+            this.templatePath(`config/package.nls.json`),
+            this.destinationPath(this.options.name, 'package.nls.json'),
+            templateData
+        );
+
+        // generate package.nls.json file
+        this.fs.copyTpl(
+            this.templatePath(`config/package.nls.zh.json`),
+            this.destinationPath(this.options.name, 'package.nls.zh.json'),
             templateData
         );
 
