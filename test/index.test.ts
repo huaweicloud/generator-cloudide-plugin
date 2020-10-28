@@ -103,7 +103,7 @@ describe('test generate project', () => {
             });
     });
 
-    it('generate generic project - ejs template engine', (done: Done) => {
+    it('generate generic project - pug template engine', (done: Done) => {
         const promptsAnswer = {
             type: 'generic',
             engineOfTemplate: 'pug',

@@ -1,6 +1,6 @@
 {
     "name": "@cloudide/generator-plugin",
-    "version": "0.1.8",
+    "version": "0.2.0",
     "description": "Generator of Huawei CloudIDE plugin",
     "main": "index.js",
     "files": [
@@ -10,7 +10,7 @@
     "scripts": {
         "prepare": "npm run build && npm run test",
         "build": "tsfmt -r && tsc",
-        "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'test/**/*.ts'",
+        "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\"}' mocha -r ts-node/register 'test/**/*.ts'",
         "eslint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix"
     },
     "keywords": [
