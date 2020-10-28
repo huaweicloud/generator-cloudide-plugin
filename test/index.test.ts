@@ -24,7 +24,7 @@ describe('test generate project', () => {
                 assert.file([
                     `${projectName}/package.json`,
                     `${projectName}/package.nls.json`,
-                    `${projectName}/package.nls.zh.json`,
+                    `${projectName}/package.nls.zh-cn.json`,
                     `${projectName}/LICENSE`,
                     `${projectName}/tsconfig.json`,
                     `${projectName}/tsfmt.json`,
@@ -73,7 +73,7 @@ describe('test generate project', () => {
                 assert.file([
                     `${projectName}/package.json`,
                     `${projectName}/package.nls.json`,
-                    `${projectName}/package.nls.zh.json`,
+                    `${projectName}/package.nls.zh-cn.json`,
                     `${projectName}/LICENSE`,
                     `${projectName}/tsconfig.json`,
                     `${projectName}/tsfmt.json`,
@@ -122,7 +122,7 @@ describe('test generate project', () => {
                 assert.file([
                     `${projectName}/package.json`,
                     `${projectName}/package.nls.json`,
-                    `${projectName}/package.nls.zh.json`,
+                    `${projectName}/package.nls.zh-cn.json`,
                     `${projectName}/LICENSE`,
                     `${projectName}/tsconfig.json`,
                     `${projectName}/tsfmt.json`,

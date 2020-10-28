@@ -279,8 +279,8 @@ class CloudIdeGenerator extends Generator {
 
         // generate package.nls.json file
         this.fs.copyTpl(
-            this.templatePath(`config/package.nls.zh.json`),
-            this.destinationPath(this.options.name, 'package.nls.zh.json'),
+            this.templatePath(`config/package.nls.zh-cn.json`),
+            this.destinationPath(this.options.name, 'package.nls.zh-cn.json'),
             templateData
         );
 

@@ -53,6 +53,8 @@ your-awesome-plugin
 ├── LICENSE
 ├── package.json
 ├── package-lock.json
+├── package.nls.json
+├── package.nls.zh.json
 ├── resources
 │   ├── icons
 │   │   ├── logo.png
@@ -453,5 +455,62 @@ class Frontend extends AbstractFrontend {
 }
 ```
 
+### i18n and l10n
+Internationalization of CloudIDE plugin can be supported by adding internationalization configuration files.
+
+#### Setting files
+By default, the plugin generator will generate `package.nls.json` and `package.nls.zh-cn.json` files .
+
+`package.nls.json`: This file is the default setting file. If the translation file needed by the current locale cannot be found, this file is used by default.
+`package.nls.*.json`: This is a translation file for a specific language, replace * with the language code you need.
+
+#### Localization of plugin page
+
+The localization of the plugin page requires the support of the template engine. Make sure to select Ejs or Pug as the template engine when generating the plug-in project.
+For EJS, using ejs tag `<%= %>` to tell template engine to render the result of the localization. We have a built-in variable l10n to store the localization data.
+```html
+<body class="plugin-body">
+    
+    <div><%= l10n['plugin.index.description'] %></div>
+
+</body>
+```
+
+For Pug, a built-in variable l10n is available as well.
+```
+html
+    head
+        meta(charset='utf-8')
+        title #{l10n['plugin.index.title']}
+        link(rel='stylesheet' href='css/default.css' crossorigin='anonymous')
+        link(rel='stylesheet' href='css/main.css' crossorigin='anonymous')
+        script(type='text/javascript' src='dist/index.js' crossorigin='anonymous')
+    body
+        div #{l10n['plugin.index.description']}
+```
+
+#### Localization of plugin backend and frontend class
+
+For plugin backend and frontend, `plugin.localize()` api is available for localization.
+```typescript
+this.plugin.localize('your_key_in_setting_files');
+```
+
+#### Note
+Localization of WebviewOptions in `plugin.ts` is a special case that you can not using plugin.localize() because the plugin object has not been created.
+In this case, we can use '%your_key%' to make the variable as a placeholder, the plugin framework will replace it automatically. 
+
+```typescript
+    const opts: WebviewOptions = {
+        viewType: 'view_type_of_your_plugin_view',
+        title: '%plugin.index.title%',
+        targetArea: 'right',
+        iconPath: 'resources/icons/plugin.svg',
+        viewUrl: 'local:resources/page/index.pug,
+        preserveFocus: true,
+        templateEngine: pug
+    };
+```
+
 ## LICENSE
-[MIT](LICENSE)
+[MIT](LICENSE) 
