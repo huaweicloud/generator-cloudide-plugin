@@ -23,9 +23,16 @@ npm i && npm run pack
 ```
 
 ## Plugin Development Guides
+
+> [Full API References](https://github.com/huaweicloud/cloudide-plugin-api/blob/master/docs/modules/_index_d_._plugin_.md)
+
+***
+
 ### Overview
 This guide describes the basic running principles of plugin and describes the API design of the plugin core framework through examples. 
 All of this article is based on a generic project that can be created by executing `yo @cloudide/plugin` and selecting the `generic` type plugin.  
+
+***
 
 ### What's The Benefit
 * The plugin frontend supports pure H5 implementation, no need to learn complex IDE extension points, and the cost of getting started is extremely low.
@@ -33,6 +40,8 @@ All of this article is based on a generic project that can be created by executi
 * Multi-view support, support for dynamically creating and destroying webviews, and direct calling of methods exposed between them.
 * Support for event subscription at the frontend.
 * Support event broadcasting between plugins.
+
+***
 
 ### Basic Concepts 
 * **backend**: JS code running in the NodeJS environment. Actually, the backend of CloudIDE instance is a web server started with express. 
@@ -45,6 +54,8 @@ When making a remote call to other scope, we should specify the scope before the
 ***If no scope is specified, the backend is called by default when the frontend calls the remote function,
 and the plugin main page fronted is called by default when the backend calls the remote function.***
 For more examples, see [Dynamic Webview](#dynamic-webview). 
+
+***
 
 ### Directory Structures of Plugin Project
 Once you have created a generic plugin project using the yo generator, the root directory of the plugin project contains the following directories and files: 
@@ -85,6 +96,8 @@ your-awesome-plugin
 * **resources/page/css/main.css**: Style sheets for your plugin page, add your own style sheets to this file.
 * **resources/icons/logo.png**: Plugin logo, which will be displayed on marketplace.
 * **resources/icons/plugin.svg**: Plugin icon, which will be displayed on CloudIDE panel.
+
+***
 
 ### Plugin Implementation
 In this section, we will go through the code to illustrate how plugin is loaded.
@@ -306,6 +319,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 ```
 
+#### Built-in exposed api
+The plugin backend exposes the CloudIDE core API to the frontend by default. Their ids start with 'cloudide' or 'plugin'. Therefore, the ids starting with 'cloudide' and 'plugin' are reserved by the plugin framework. 
+When you expose the method on the backend, **avoid using 'cloudide' and 'plugin' at the beginning of the id.**  
+
+In the backend, we can directly use the imported cloudide module to call the API provided to the plugin, such as `cloudide.window.showInformationMessage('hello world!')`.
+In order to allow the frontend to directly call these APIs, we expose all the APIs of the cloudide module by default, so we can directly call them through `plugin.call()` on the frontend.
+For the backend API call `cloudide.window.showInformationMessage('hello world!')`, We can use `plugin.call('cloudide.window.showInformationMessage', 'hello world!')` in the frontend. 
+The first parameter is the name of the API to be called, and the following parameters will be used as the parameters of the API call.
+Here we make a comparison of two commonly used APIs：([Full API](https://github.com/huaweicloud/cloudide-plugin-api/blob/master/docs/modules/_index_d_._plugin_.md))
+|backend                                                   |frontend                                                               |
+|----------------------------------------------------------|-----------------------------------------------------------------------|
+|cloudide.command.executeCommand('command_id', ...args)    |plugin.call('cloudide.command.executeCommand', ...args)                |
+|cloudide.window.showInformationMessage('hello world!')    |plugin.call('cloudide.window.showInformationMessage', 'hello world!')  |
+
+
 #### Dynamic Webview
 In some scenarios, we need to dynamically create views on the CloudIDE workbench. 
 The feature of *dynamic webview* provides an approach to create webview programmatically in frontend.
@@ -455,14 +483,27 @@ class Frontend extends AbstractFrontend {
 }
 ```
 
+***
+
 ### i18n and l10n
-Internationalization of CloudIDE plugin can be supported by adding internationalization configuration files.
+Internationalization of CloudIDE plugin can be supported by adding internationalization setting files.
 
 #### Setting files
 By default, the plugin generator will generate `package.nls.json` and `package.nls.zh-cn.json` files .
 
 `package.nls.json`: This file is the default setting file. If the translation file needed by the current locale cannot be found, this file is used by default.
 `package.nls.*.json`: This is a translation file for a specific language, replace * with the language code you need.
+
+The value definition of the message can include placeholders '`{0} {1} {2}...`'. When using `this.plugin.localize(key, ..args)` method for localization, the placeholders can be replaced with the required values ​​through parameters.
+```json
+{
+    "plugin.index.title": "Huawei CloudIDE demo plugin main page",
+    "plugin.index.description": "This is the plugin frontend page",
+    "plugin.dynamicview.title": "Huawei CloudIDE demo plugin dynamic webview page",
+    "plugin.dynamicview.description": "This is the plugin frontend page created dynamically",
+    "plugin.show.progress": "{0}% completed..."
+}
+```
 
 #### Localization of plugin page
 
@@ -491,12 +532,13 @@ html
 
 #### Localization of plugin backend and frontend class
 
-For plugin backend and frontend, `plugin.localize()` api is available for localization.
+For plugin backend and frontend, `plugin.localize(key: string, ...args: any[])` api is available for localization.
+
 ```typescript
-this.plugin.localize('your_key_in_setting_files');
+this.plugin.localize('your_key_in_setting_files', ...your_args);
 ```
 
-#### Note
+#### Notice
 Localization of WebviewOptions in `plugin.ts` is a special case that you can not using plugin.localize() because the plugin object has not been created.
 In this case, we can use '%your_key%' to make the variable as a placeholder, the plugin framework will replace it automatically. 
 
@@ -511,6 +553,8 @@ In this case, we can use '%your_key%' to make the variable as a placeholder, the
         templateEngine: pug
     };
 ```
+
+***
 
 ## LICENSE
 [MIT](LICENSE) 
