@@ -363,7 +363,7 @@ module.exports = {
     ...
 </head>
 ```
-* setp 5: Call `Plugin.createDynamicWebview()` to create the dynamic webview, `opts` passed to the
+* setp 5: Call `plugin.createDynamicWebview()` to create the dynamic webview, `opts` passed to the
 create function is a type of `WebviewOptions`, you should change the properties to your dynamic view.
 ```typescript
     run(): void {
@@ -548,7 +548,7 @@ In this case, we can use '%your_key%' to make the variable as a placeholder, the
         title: '%plugin.index.title%',
         targetArea: 'right',
         iconPath: 'resources/icons/plugin.svg',
-        viewUrl: 'local:resources/page/index.pug,
+        viewUrl: 'local:resources/page/index.pug',
         preserveFocus: true,
         templateEngine: pug
     };
