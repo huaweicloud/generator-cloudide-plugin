@@ -35,7 +35,7 @@ All of this article is based on a generic project that can be created by executi
 ***
 
 ### What's The Benefit
-* The plugin frontend supports pure H5 implementation, no need to learn complex IDE extension points, and the cost of getting started is extremely low.
+* The plugin frontend supports pure H5 implementation, no need to learn complex IDE extension points, and it's easy to get started.
 * The plugin supports directly calling the exposed methods between the frontend and backend, and returns Promise, without directly using postMessage for message sending.
 * Multi-view support, support for dynamically creating and destroying webviews, and direct calling of methods exposed between them.
 * Support for event subscription at the frontend.
