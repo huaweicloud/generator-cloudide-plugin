@@ -1,3 +1,8 @@
+/********************************************************************************
+ * Copyright (C) 2020. Huawei Technologies Co., Ltd. All rights reserved.
+ * SPDX-License-Identifier: MIT
+ ********************************************************************************/
+
 import * as assert from 'yeoman-assert';
 import * as helpers from 'yeoman-test';
 import { Done } from 'mocha';
