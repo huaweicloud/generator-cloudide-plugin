@@ -26,6 +26,8 @@ npm i && npm run pack
 
 > [Full API References](https://github.com/huaweicloud/cloudide-plugin-api/blob/master/docs/modules/_index_d_._plugin_.md)
 
+> [Examples](https://github.com/HuaweiIDE)
+
 ***
 
 ### Overview
