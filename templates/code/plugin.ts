@@ -27,17 +27,6 @@ export function start(context: cloudide.ExtensionContext) {
      */
     const backends = [Backend];
 
-    /**
-     * Register a startup command for the plugin.
-     * After closing the plugin, you can restart the plugin by entering the command displayed by the label through the F1 command. 
-     * command registeration can be removed as needed.
-     */
-    context.subscriptions.push(
-        cloudide.commands.registerCommand(opts.title, () => {
-            Plugin.create(context, opts, backends);
-        })
-    );
-
     Plugin.create(context, opts, backends);
 }
 
