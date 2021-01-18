@@ -27,6 +27,13 @@ export function start(context: cloudide.ExtensionContext) {
      */
     const backends = [Backend];
 
+    /**
+     * RegisterCloudideWebview allows plugin to be quickly loaded when the instance is refreshed.
+     */
+    if (cloudide.window.registerCloudideWebview) {
+        cloudide.window.registerCloudideWebview(opts.viewType);
+    }
+
     Plugin.create(context, opts, backends);
 }
 
