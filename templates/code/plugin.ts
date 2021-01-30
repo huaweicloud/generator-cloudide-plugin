@@ -1,6 +1,7 @@
 <%- include(`../common/LICENSE-${license}-HEADER`, {year: year, author: author}); %>
 
-import * as cloudide from '@cloudide/plugin';<% if(type == 'generic') { %>
+import * as cloudide from '@cloudide/plugin';
+import { initNlsConfig, localize } from '@cloudide/nls';<% if(type == 'generic') { %>
 import { WebviewOptions } from '@cloudide/core/lib/common/plugin-common';
 import { Plugin } from '@cloudide/core/lib/node/plugin-api';
 import { Backend } from './node/backend';
@@ -10,9 +11,14 @@ import { Backend } from './node/backend';
  */
 export function start(context: cloudide.ExtensionContext) {
 
+    /**
+     *  Initialize language settings.
+     */
+    initNlsConfig(context.extensionPath);
+
     const opts: WebviewOptions = {
         viewType: 'view_type_of_your_plugin_view',
-        title: '%plugin.index.title%',
+        title: localize('plugin.index.title'),
         targetArea: 'right',
         iconPath: 'resources/icons/plugin.svg',
         viewUrl: 'local:resources/page/index.<% if( engineOfTemplate === 'ejs' ) { %>ejs<% } else if( engineOfTemplate === 'pug' ) { %>pug<% } else { %>html<% } %>',
@@ -45,11 +51,16 @@ export function stop(context: cloudide.ExtensionContext) {
 export function start(context: cloudide.ExtensionContext) {
 
     /**
+     *  Initialize language settings.
+     */
+    initNlsConfig(context.extensionPath);
+
+    /**
      * Register a command for the plugin.
      */
     context.subscriptions.push(
         cloudide.commands.registerCommand('plugin.sayHello', () => {
-            cloudide.window.showInformationMessage('Hello World!');
+            cloudide.window.showInformationMessage(localize('plugin.hello'));
         })
     );
 }

@@ -9,6 +9,27 @@ import { Done } from 'mocha';
 import path = require('path');
 import fs = require('fs');
 
+const backendDefaultNlsJsonFileContent = `{
+    "plugin.hello": "Hello World!"
+}`;
+const backendZhNlsJsonFileContent = `{
+    "plugin.hello": "你好， 世界!"
+}`;
+
+const genericDefaultNlsJsonFileContent = `{
+    "plugin.index.title": "Huawei CloudIDE demo plugin main page",
+    "plugin.index.description": "This is the plugin frontend page",
+    "plugin.dynamicview.title": "Huawei CloudIDE demo plugin dynamic webview page",
+    "plugin.dynamicview.description": "This is the plugin frontend page created dynamically"
+}`;
+
+const genericZhNlsJsonFileContent = `{
+    "plugin.index.title": "华为云IDE样例插件主页面",
+    "plugin.index.description": "这是插件的前端页面",
+    "plugin.dynamicview.title": "华为云IDE样例插件动态创建的插件页面",
+    "plugin.dynamicview.description": "这是一个动态创建的插件页面"
+}`;
+
 describe('test generate project', () => {
     it('generate generic project - no template engine', (done: Done) => {
         const promptsAnswer = {
@@ -52,6 +73,8 @@ describe('test generate project', () => {
                 assert.equal(packageJson.description, promptsAnswer.description);
                 assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
                 assert.fileContent(`${projectName}/LICENSE`, /^The MIT License/);
+                assert.fileContent(`${projectName}/package.nls.json`, genericDefaultNlsJsonFileContent);
+                assert.fileContent(`${projectName}/package.nls.zh-cn.json`, genericZhNlsJsonFileContent);
                 done();
             })
             .catch((err) => {
@@ -101,6 +124,8 @@ describe('test generate project', () => {
                 assert.equal(packageJson.description, promptsAnswer.description);
                 assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
                 assert.fileContent(`${projectName}/LICENSE`, /^The MIT License/);
+                assert.fileContent(`${projectName}/package.nls.json`, genericDefaultNlsJsonFileContent);
+                assert.fileContent(`${projectName}/package.nls.zh-cn.json`, genericZhNlsJsonFileContent);
                 done();
             })
             .catch((err) => {
@@ -150,6 +175,8 @@ describe('test generate project', () => {
                 assert.equal(packageJson.description, promptsAnswer.description);
                 assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
                 assert.fileContent(`${projectName}/LICENSE`, /^The MIT License/);
+                assert.fileContent(`${projectName}/package.nls.json`, genericDefaultNlsJsonFileContent);
+                assert.fileContent(`${projectName}/package.nls.zh-cn.json`, genericZhNlsJsonFileContent);
                 done();
             })
             .catch((err) => {
@@ -192,6 +219,8 @@ describe('test generate project', () => {
                 assert.equal(packageJson.author, promptsAnswer.author);
                 assert.equal(packageJson.description, promptsAnswer.description);
                 assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
+                assert.fileContent(`${projectName}/package.nls.json`, backendDefaultNlsJsonFileContent);
+                assert.fileContent(`${projectName}/package.nls.zh-cn.json`, backendZhNlsJsonFileContent);
                 done();
             })
             .catch((err) => {

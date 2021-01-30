@@ -36,6 +36,11 @@
         "webpack": "^4.39.2",
         "webpack-cli": "^3.3.7"<% } %>
     },
+    "dependencies": {
+        "@cloudide/nls": "latest"<% if(type == 'generic') { %>,
+        "@cloudide/core": "latest",
+        "@cloudide/messaging": "latest"<% } %>
+    },
     "scripts": {
         "prepare": "npm run clean && npm run build",
         "clean": "rimraf dist",
@@ -52,11 +57,7 @@
     },
     "theiaPlugin": {
         "backend": "dist/plugin.js"
-    },<% if(type == 'generic') { %>
-    "dependencies": {
-        "@cloudide/core": "latest",
-        "@cloudide/messaging": "latest"
-    },<% } %>
+    },
     "extensionDependencies" : [
         "huawei-builtin.huawei-cloudide-common"
     ]
