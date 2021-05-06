@@ -541,13 +541,13 @@ this.plugin.localize('your_key_in_setting_files', ...your_args);
 ```
 
 #### Notice
-Localization of WebviewOptions in `plugin.ts` is a special case that you can not using plugin.localize() because the plugin object has not been created.
-In this case, we can use '%your_key%' to make the variable as a placeholder, the plugin framework will replace it automatically. 
+Localization of WebviewOptions in `plugin.ts` is a special case that you can not use plugin.localize() because the `plugin` object has not been created.
+In this case, we can use `localize('your_key')` to translate directly, or using `'%your_key%'` to make the variable as a placeholder, the plugin framework will replace it automatically. 
 
 ```typescript
     const opts: WebviewOptions = {
         viewType: 'view_type_of_your_plugin_view',
-        title: '%plugin.index.title%',
+        title: localize('plugin.index.title'),
         targetArea: 'right',
         iconPath: 'resources/icons/plugin.svg',
         viewUrl: 'local:resources/page/index.pug',
