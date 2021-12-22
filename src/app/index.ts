@@ -190,6 +190,13 @@ class CloudIdeGenerator extends Generator {
             templateData
         );
 
+        // generate README.md file
+        this.fs.copyTpl(
+            this.templatePath(`common/README.ejs`),
+            this.destinationPath(this.options.name, 'README.md'),
+            templateData
+        );
+
         // generate plugin file
         this.fs.copyTpl(
             this.templatePath(`code/plugin.ts`),

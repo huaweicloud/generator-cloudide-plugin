@@ -64,7 +64,8 @@ describe('test generate project', () => {
                     `${projectName}/src/browser/dynamic-webview.ts`,
                     `${projectName}/src/browser/frontend.ts`,
                     `${projectName}/src/node/backend.ts`,
-                    `${projectName}/src/plugin.ts`
+                    `${projectName}/src/plugin.ts`,
+                    `${projectName}/README.md`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
@@ -115,7 +116,8 @@ describe('test generate project', () => {
                     `${projectName}/src/browser/dynamic-webview.ts`,
                     `${projectName}/src/browser/frontend.ts`,
                     `${projectName}/src/node/backend.ts`,
-                    `${projectName}/src/plugin.ts`
+                    `${projectName}/src/plugin.ts`,
+                    `${projectName}/README.md`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
@@ -166,7 +168,8 @@ describe('test generate project', () => {
                     `${projectName}/src/browser/dynamic-webview.ts`,
                     `${projectName}/src/browser/frontend.ts`,
                     `${projectName}/src/node/backend.ts`,
-                    `${projectName}/src/plugin.ts`
+                    `${projectName}/src/plugin.ts`,
+                    `${projectName}/README.md`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
@@ -211,7 +214,8 @@ describe('test generate project', () => {
                     `${projectName}/LICENSE`,
                     `${projectName}/tsconfig.json`,
                     `${projectName}/tsfmt.json`,
-                    `${projectName}/src/plugin.ts`
+                    `${projectName}/src/plugin.ts`,
+                    `${projectName}/README.md`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
