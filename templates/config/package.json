@@ -48,8 +48,11 @@
         "watch": "tsc -watch",
         "compile": "tsc",
         "pack": "cloudide-pack -p",<% if(type == 'generic') { %>
-        "build": "npm run format-code && npm run compile && webpack",
-        "build-browser": "webpack --config webpack.config.js"<% } else { %>
+        "pack:dev": "npm run build:dev && cloudide-pack -s",
+        "build": "npm run format-code && npm run compile && npm run build-browser",
+        "build:dev": "npm run clean && npm run format-code && npm run compile && npm run build-browser:dev",
+        "build-browser": "webpack --mode production",
+        "build-browser:dev": "webpack --mode development --devtool inline-source-map"<% } else { %>
         "build": "npm run format-code && npm run compile"<% } %>
     },
     "engines": {

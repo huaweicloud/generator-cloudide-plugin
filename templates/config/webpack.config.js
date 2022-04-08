@@ -5,7 +5,6 @@ module.exports = {
         'page/dist/index': './src/browser/frontend.ts',
         'page/dist/dynamic-webview-index': './src/browser/dynamic-webview.ts'
     },
-    mode: 'development',
     module: {
         rules: [
             {
@@ -23,5 +22,4 @@ module.exports = {
         filename: '[name].js',
         libraryTarget: 'umd'
     },
-    devtool: 'source-map'
 };
