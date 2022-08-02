@@ -1,15 +1,15 @@
 <%- include(`../common/LICENSE-${license}-HEADER`, {year: year, author: author}); %>
 
-import * as cloudide from '@cloudide/plugin';
-import { initNlsConfig, localize } from '@cloudide/nls';<% if(type == 'generic') { %>
-import { WebviewOptions } from '@cloudide/core/lib/common/plugin-common';
-import { Plugin } from '@cloudide/core/lib/node/plugin-api';
+import * as codearts from '@codearts/plugin';
+import { initNlsConfig, localize } from '@cloudide/nls';<% if(type == 'webview') { %>
+import { WebviewOptions } from '@codearts/core/lib/common/plugin-common';
+import { Plugin } from '@codearts/core/lib/node/plugin-api';
 import { Backend } from './node/backend';
 
 /**
  * Plugin activation entry point, this function is called when plugin is loaded.
  */
-export function start(context: cloudide.ExtensionContext) {
+export function start(context: codearts.ExtensionContext) {
 
     /**
      *  Initialize language settings.
@@ -40,15 +40,15 @@ export function start(context: cloudide.ExtensionContext) {
  * The method that is called when the plugin is stopped. 
  * If you need to customize the clean-up action that the plug-in stops, you can add it to the method.
  */
-export function stop(context: cloudide.ExtensionContext) {
+export function stop(context: codearts.ExtensionContext) {
     Plugin.getInstance().stop();
 }
 <% } else { %>
-    
+
 /**
  * Plugin activation entry point
  */
-export function start(context: cloudide.ExtensionContext) {
+export function start(context: codearts.ExtensionContext) {
 
     /**
      *  Initialize language settings.
@@ -59,8 +59,8 @@ export function start(context: cloudide.ExtensionContext) {
      * Register a command for the plugin.
      */
     context.subscriptions.push(
-        cloudide.commands.registerCommand('plugin.sayHello', () => {
-            cloudide.window.showInformationMessage(localize('plugin.hello'));
+        codearts.commands.registerCommand('plugin.sayHello', () => {
+            codearts.window.showInformationMessage(localize('plugin.hello'));
         })
     );
 }
@@ -69,7 +69,7 @@ export function start(context: cloudide.ExtensionContext) {
  * The method that is automatically called when the plugin is stopped. 
  * You can add your own clean-up actions to this method.
  */
-export function stop(context: cloudide.ExtensionContext) {
+export function stop(context: codearts.ExtensionContext) {
     
 }
 <% } %>

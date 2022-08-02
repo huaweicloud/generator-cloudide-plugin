@@ -1,4 +1,4 @@
-<% if(type == 'generic') { %>{
+<% if(type == 'webview') { %>{
     "plugin.index.title": "华为云IDE样例插件主页面",
     "plugin.index.description": "这是插件的前端页面",
     "plugin.dynamicview.title": "华为云IDE样例插件动态创建的插件页面",

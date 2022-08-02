@@ -1,9 +1,9 @@
 <%- include(`../common/LICENSE-${license}-HEADER`, { year: year, author: author }); %>
 
-import * as cloudide from '@cloudide/plugin';
+import * as cloudide from '@codearts/plugin';
 import { exposable, expose } from '@cloudide/messaging';
-import { LogLevel } from '@cloudide/core/lib/common/plugin-common';
-import { AbstractBackend } from '@cloudide/core/lib/node/plugin-api';
+import { LogLevel } from '@codearts/core/lib/common/plugin-common';
+import { AbstractBackend } from '@codearts/core/lib/node/plugin-api';
 
 /**
  * Add your backend api in this class

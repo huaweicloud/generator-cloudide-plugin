@@ -31,9 +31,9 @@ const genericZhNlsJsonFileContent = `{
 }`;
 
 describe('test generate project', () => {
-    it('generate generic project - no template engine', (done: Done) => {
+    it('generate webview project - no template engine', (done: Done) => {
         const promptsAnswer = {
-            type: 'generic',
+            type: 'webview',
             engineOfTemplate: 'none',
             publisher: 'tester',
             author: 'tester',
@@ -41,7 +41,7 @@ describe('test generate project', () => {
             description: 'this is a test case',
             repository: false
         };
-        const projectName = 'generic-project';
+        const projectName = 'webview-project';
         helpers
             .run(path.join(__dirname, '../generators/app'))
             .withArguments([projectName])
@@ -65,7 +65,9 @@ describe('test generate project', () => {
                     `${projectName}/src/browser/frontend.ts`,
                     `${projectName}/src/node/backend.ts`,
                     `${projectName}/src/plugin.ts`,
-                    `${projectName}/README.md`
+                    `${projectName}/README.md`,
+                    `${projectName}/.arts/launch.json`,
+                    `${projectName}/.arts/tasks.json`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
@@ -83,9 +85,9 @@ describe('test generate project', () => {
             });
     });
 
-    it('generate generic project - ejs template engine', (done: Done) => {
+    it('generate webview project - ejs template engine', (done: Done) => {
         const promptsAnswer = {
-            type: 'generic',
+            type: 'webview',
             engineOfTemplate: 'ejs',
             publisher: 'tester',
             author: 'tester',
@@ -93,7 +95,7 @@ describe('test generate project', () => {
             description: 'this is a test case',
             repository: false
         };
-        const projectName = 'generic-project';
+        const projectName = 'webview-project';
         helpers
             .run(path.join(__dirname, '../generators/app'))
             .withArguments([projectName])
@@ -117,7 +119,9 @@ describe('test generate project', () => {
                     `${projectName}/src/browser/frontend.ts`,
                     `${projectName}/src/node/backend.ts`,
                     `${projectName}/src/plugin.ts`,
-                    `${projectName}/README.md`
+                    `${projectName}/README.md`,
+                    `${projectName}/.arts/launch.json`,
+                    `${projectName}/.arts/tasks.json`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
@@ -135,9 +139,9 @@ describe('test generate project', () => {
             });
     });
 
-    it('generate generic project - pug template engine', (done: Done) => {
+    it('generate webview project - pug template engine', (done: Done) => {
         const promptsAnswer = {
-            type: 'generic',
+            type: 'webview',
             engineOfTemplate: 'pug',
             publisher: 'tester',
             author: 'tester',
@@ -145,7 +149,7 @@ describe('test generate project', () => {
             description: 'this is a test case',
             repository: false
         };
-        const projectName = 'generic-project';
+        const projectName = 'webview-project';
         helpers
             .run(path.join(__dirname, '../generators/app'))
             .withArguments([projectName])
@@ -169,7 +173,9 @@ describe('test generate project', () => {
                     `${projectName}/src/browser/frontend.ts`,
                     `${projectName}/src/node/backend.ts`,
                     `${projectName}/src/plugin.ts`,
-                    `${projectName}/README.md`
+                    `${projectName}/README.md`,
+                    `${projectName}/.arts/launch.json`,
+                    `${projectName}/.arts/tasks.json`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
@@ -187,27 +193,20 @@ describe('test generate project', () => {
             });
     });
 
-    it('generate backend project', (done: Done) => {
+    it('generate simple project', (done: Done) => {
         const promptsAnswer = {
-            type: 'backend',
+            type: 'simple',
             publisher: 'tester',
             author: 'tester',
             license: 'BSD',
             description: 'this is a test case',
             repository: false
         };
-        const projectName = 'backend-project';
+        const projectName = 'simple-project';
         helpers
             .run(path.join(__dirname, '../generators/app'))
             .withArguments([`${projectName}`])
-            .withPrompts({
-                type: 'backend',
-                publisher: 'tester',
-                author: 'tester',
-                license: 'BSD',
-                description: 'this is a test case',
-                repository: false
-            })
+            .withPrompts(promptsAnswer)
             .then(() => {
                 assert.file([
                     `${projectName}/package.json`,
@@ -215,7 +214,9 @@ describe('test generate project', () => {
                     `${projectName}/tsconfig.json`,
                     `${projectName}/tsfmt.json`,
                     `${projectName}/src/plugin.ts`,
-                    `${projectName}/README.md`
+                    `${projectName}/README.md`,
+                    `${projectName}/.arts/launch.json`,
+                    `${projectName}/.arts/tasks.json`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);

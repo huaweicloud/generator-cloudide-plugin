@@ -1,7 +1,7 @@
 {
-    "name": "@cloudide/generator-plugin",
-    "version": "0.2.5",
-    "description": "Generator of Huawei CloudIDE plugin",
+    "name": "@codearts/generator-plugin",
+    "version": "0.3.1",
+    "description": "Generator of Huawei CodeArts plugin",
     "main": "index.js",
     "files": [
         "generators",

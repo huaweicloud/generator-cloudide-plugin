@@ -14,10 +14,11 @@
     "files": [
         "src"
     ],
-    "activationEvents": [<% if(type == 'generic') { %>
+    "main": "dist/plugin.js",
+    "activationEvents": [<% if(type == 'webview') { %>
         "*"<% } else { %> 
         "onCommand:plugin.sayHello"<% } %>
-    ],<% if(type == 'backend') { %>
+    ],<% if(type == 'simple') { %>
     "contributes": {
 		"commands": [
 			{
@@ -27,18 +28,18 @@
 		]
 	},<% } %> 
     "devDependencies": {
-        "@cloudide/plugin": "latest",
+        "@codearts/plugin": "latest",
         "@cloudide/plugin-packager": "latest",
         "rimraf": "2.6.2",
         "ts-loader": "^6.0.4",
         "typescript": "^3.9.7",
-        "typescript-formatter": "7.2.2"<% if(type == 'generic') { %>,
+        "typescript-formatter": "7.2.2"<% if(type == 'webview') { %>,
         "webpack": "^4.39.2",
         "webpack-cli": "^3.3.7"<% } %>
     },
     "dependencies": {
-        "@cloudide/nls": "latest"<% if(type == 'generic') { %>,
-        "@cloudide/core": "latest",
+        "@cloudide/nls": "latest"<% if(type == 'webview') { %>,
+        "@codearts/core": "latest",
         "@cloudide/messaging": "latest"<% } %>
     },
     "scripts": {
@@ -47,18 +48,12 @@
         "format-code": "tsfmt -r",
         "watch": "tsc -watch",
         "compile": "tsc",
-        "pack": "cloudide-pack -p",<% if(type == 'generic') { %>
+        "pack": "cloudide-pack -p",<% if(type == 'webview') { %>
         "build": "npm run format-code && npm run compile && webpack",
         "build-browser": "webpack --config webpack.config.js"<% } else { %>
         "build": "npm run format-code && npm run compile"<% } %>
     },
     "engines": {
-        "theiaPlugin": "next"
-    },
-    "theiaPlugin": {
-        "backend": "dist/plugin.js"
-    },
-    "extensionDependencies" : [
-        "huawei-builtin.huawei-cloudide-common"
-    ]
+        "codearts": "^1.0.0"
+    }
 }

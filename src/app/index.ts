@@ -45,7 +45,7 @@ class CloudIdeGenerator extends Generator {
     }
 
     async prompting() {
-        this.log(yosay('welcome to Huawei CloudIDE plugin generator!'));
+        this.log(yosay('welcome to Huawei CodeArts plugin generator!'));
 
         const opts = this.options as CommandLineOption;
         if (!opts.type) {
@@ -55,19 +55,19 @@ class CloudIdeGenerator extends Generator {
                 message: `Which type of plugin do you want to create?`,
                 choices: [
                     {
-                        name: 'Generic Plugin - This will enable advanced fetaures to write the plugin UI using HTML.',
-                        value: 'generic'
+                        name: 'Simple Plugin',
+                        value: 'simple'
                     },
                     {
-                        name: 'Backend Plugin - The plugin can run on the backend and advanced fetaures are disabled.',
-                        value: 'backend'
+                        name: 'Plugin with webview panel',
+                        value: 'webview'
                     }
                 ]
             });
             opts.type = answers.type;
         }
 
-        if (opts.type === 'generic' && !opts.engineOfTemplate) {
+        if (opts.type === 'webview' && !opts.engineOfTemplate) {
             const answers = await this.prompt({
                 type: 'list',
                 name: 'engineOfTemplate',
@@ -183,6 +183,9 @@ class CloudIdeGenerator extends Generator {
             description: this.options.description
         };
 
+        // copy project setting files
+        this.fs.copy(this.templatePath(`config/.arts`), this.destinationPath(this.options.name, '.arts'));
+
         // generate license file
         this.fs.copyTpl(
             this.templatePath(`common/LICENSE-${this.options.license}`),
@@ -204,7 +207,7 @@ class CloudIdeGenerator extends Generator {
             templateData
         );
 
-        if (this.options.type === 'generic') {
+        if (this.options.type === 'webview') {
             // generate backend file
             this.fs.copyTpl(
                 this.templatePath(`code/backend.ts`),
