@@ -1,6 +1,6 @@
 {
     "name": "@codearts/generator-plugin",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "description": "Generator of Huawei CodeArts plugin",
     "main": "index.js",
     "files": [

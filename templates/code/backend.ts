@@ -1,6 +1,6 @@
 <%- include(`../common/LICENSE-${license}-HEADER`, { year: year, author: author }); %>
 
-import * as cloudide from '@codearts/plugin';
+import * as codearts from '@codearts/plugin';
 import { exposable, expose } from '@cloudide/messaging';
 import { LogLevel } from '@codearts/core/lib/common/plugin-common';
 import { AbstractBackend } from '@codearts/core/lib/node/plugin-api';
@@ -44,7 +44,7 @@ export class Backend extends AbstractBackend {
      */
     @expose('your_backend_function_identifier')
     public doSomething(name: string): boolean {
-        cloudide.window.showInformationMessage(`hello ${name}!`);
+        codearts.window.showInformationMessage(`hello ${name}!`);
         return true;
     }
 

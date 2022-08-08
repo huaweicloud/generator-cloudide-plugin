@@ -54,6 +54,6 @@
         "build": "npm run format-code && npm run compile"<% } %>
     },
     "engines": {
-        "codearts": "^1.0.0"
+        "codearts": "^2.0.0"
     }
 }
