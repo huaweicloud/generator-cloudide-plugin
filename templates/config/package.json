@@ -48,7 +48,7 @@
         "format-code": "tsfmt -r",
         "watch": "tsc -watch",
         "compile": "tsc",
-        "pack": "cloudide-pack -p",<% if(type == 'webview') { %>
+        "pack": "codearts-pack -p",<% if(type == 'webview') { %>
         "build": "npm run format-code && npm run compile && webpack",
         "build-browser": "webpack --config webpack.config.js"<% } else { %>
         "build": "npm run format-code && npm run compile"<% } %>

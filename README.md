@@ -1,30 +1,30 @@
-# HUAWEI CloudIDE plugin Generator
-This generator will help you create a HUAWEI CloudIDE plugin project.
+# HUAWEI CodeArts plugin Generator
+This generator will help you create a HUAWEI CodeArts plugin project.
 
 ## How to use
-The CloudIDE plugin can be developed using the CloudIDE itself. 
-You can obtain a CloudIDE instance from [Huawei CloudIDE official site](https://www.huaweicloud.com/product/cloudide.html). 
+The CodeArts plugin can be developed using the CodeArts itself. 
+You can obtain a copy of CodeArts installation from [Huawei IDE official site](https://www.huaweicloud.com/product/ide.html). 
 
-### Install Yeoman and CloudIDE plugin generator
+### Install Yeoman and CodeArts plugin generator
 ```bash
-npm install -g yo @cloudide/generator-plugin
+npm install -g yo @codearts/generator-plugin
 ```
 
 ### Run Generator using yo command
 The generator will ask you a few questions and create the project as you choose. 
 ```bash
-yo @cloudide/plugin
+yo @codearts/plugin
 ```
 
 ### Build Your Plugin
-After runing the following command, a plugin file ending with `.cloudide` will be generated in the project root directory
+After runing the following command, a plugin file ending with `.carts` will be generated in the project root directory
 ```bash
 npm i && npm run pack
 ```
 
 ## Plugin Development Guides
 
-> [Full API References](https://github.com/huaweicloud/cloudide-plugin-api/blob/master/docs/modules/_index_d_._plugin_.md)
+> [Full API References](https://github.com/huaweicloud/cloudide-plugin-api/blob/codearts/docs/modules/_codearts_plugin_.md)
 
 > [Examples](https://github.com/HuaweiIDE)
 
@@ -32,7 +32,7 @@ npm i && npm run pack
 
 ### Overview
 This guide describes the basic running principles of plugin and describes the API design of the plugin core framework through examples. 
-All of this article is based on a generic project that can be created by executing `yo @cloudide/plugin` and selecting the `generic` type plugin.  
+All of this article is based on a webview project that can be created by executing `yo @codearts/plugin` and selecting the `Plugin with webview panel` type plugin.  
 
 ***
 
@@ -46,7 +46,7 @@ All of this article is based on a generic project that can be created by executi
 ***
 
 ### Basic Concepts 
-* **backend**: JS code running in the NodeJS environment. Actually, the backend of CloudIDE instance is a web server started with express. 
+* **backend**: JS code running in the NodeJS environment. 
 * **frontend**: JS code running in the Browser environment.
 * **remote call**: Make a remote function call exposed between the frontend and backend.
 * **scope**: When we exposed a function in the backend or frontend, the running environment is the scope of the function.
@@ -97,13 +97,13 @@ your-awesome-plugin
 * **resources/page/css/default.css**: Basic style sheets, do not modify this file.
 * **resources/page/css/main.css**: Style sheets for your plugin page, add your own style sheets to this file.
 * **resources/icons/logo.png**: Plugin logo, which will be displayed on marketplace.
-* **resources/icons/plugin.svg**: Plugin icon, which will be displayed on CloudIDE panel.
+* **resources/icons/plugin.svg**: Plugin icon, which will be displayed on activity bar.
 
 ***
 
 ### Plugin Implementation
 In this section, we will go through the code to illustrate how plugin is loaded.
-After being started, CloudIDE instances load plugins in sequence based on the dependency. 
+After being started, CodeArts will load plugins in sequence based on the dependency. 
 
 #### Entry File
 The default entry file of plugin is **plugin.ts**, which export `start` and `stop` functions. `start` function is invoked by default
@@ -113,7 +113,7 @@ You can add your own clean-up actions to this method.
 /**
  * Plugin activation entry point, this function is called when plugin is loaded.
  */
-export function start(context: cloudide.ExtensionContext) {
+export function start(context: codearts.ExtensionContext) {
 
     const opts: WebviewOptions = {
         viewType: 'view_type_of_your_plugin_view',
@@ -137,7 +137,7 @@ export function start(context: cloudide.ExtensionContext) {
      * command registeration can be removed as needed.
      */
     context.subscriptions.push(
-        cloudide.commands.registerCommand(opts.title, () => {
+        codearts.commands.registerCommand(opts.title, () => {
             Plugin.createOrShow(context, opts, backends);
         })
     );
@@ -149,7 +149,7 @@ export function start(context: cloudide.ExtensionContext) {
  * The method that is called when the plugin is stopped. 
  * If you need to customize the clean-up action that the plug-in stops, you can add it to the method.
  */
-export function stop(context: cloudide.ExtensionContext) {
+export function stop(context: codearts.ExtensionContext) {
     Plugin.getInstance().stop();
 }
 ```
@@ -192,7 +192,7 @@ export interface WebviewOptions {
     preserveFocus?: boolean;
     /**
      * Extra data passed to the view.
-     * Getting extra data using 'plugin.cloudidePluginApi.getExtData()' in frontend.
+     * Getting extra data using 'plugin.codeartsPluginApi.getExtData()' in frontend.
      */
     extData?: any;
 }
@@ -248,7 +248,7 @@ export class Backend extends AbstractBackend {
      */
     @expose('your_backend_function_identifier')
     public doSomething(name: string): boolean {
-        cloudide.window.showInformationMessage(`hello ${name}!`);
+        codearts.window.showInformationMessage(`hello ${name}!`);
         return true;
     }
 
@@ -322,22 +322,22 @@ document.addEventListener('DOMContentLoaded', function() {
 ```
 
 #### Built-in exposed api
-The plugin backend exposes the CloudIDE core API to the frontend by default. Their ids start with 'cloudide' or 'plugin'. Therefore, the ids starting with 'cloudide' and 'plugin' are reserved by the plugin framework. 
-When you expose the method on the backend, **avoid using 'cloudide' and 'plugin' at the beginning of the id.**  
+The plugin backend exposes the CodeArts core API to the frontend by default. Their ids start with 'codearts' or 'plugin'. Therefore, the ids starting with 'codearts' and 'plugin' are reserved by the plugin framework. 
+When you expose the method on the backend, **avoid using 'codearts' and 'plugin' at the beginning of the id.**  
 
-In the backend, we can directly use the imported cloudide module to call the API provided to the plugin, such as `cloudide.window.showInformationMessage('hello world!')`.
-In order to allow the frontend to directly call these APIs, we expose all the APIs of the cloudide module by default, so we can directly call them through `plugin.call()` on the frontend.
-For the backend API call `cloudide.window.showInformationMessage('hello world!')`, We can use `plugin.call('cloudide.window.showInformationMessage', 'hello world!')` in the frontend. 
+In the backend, we can directly use the imported codearts module to call the API provided to the plugin, such as `codearts.window.showInformationMessage('hello world!')`.
+In order to allow the frontend to directly call these APIs, we expose all the APIs of the codearts module by default, so we can directly call them through `plugin.call()` on the frontend.
+For the backend API call `codearts.window.showInformationMessage('hello world!')`, We can use `plugin.call('codearts.window.showInformationMessage', 'hello world!')` in the frontend. 
 The first parameter is the name of the API to be called, and the following parameters will be used as the parameters of the API call.
 Here we make a comparison of two commonly used APIs：([Full API](https://github.com/huaweicloud/cloudide-plugin-api/blob/master/docs/modules/_index_d_._plugin_.md))
 |backend                                                   |frontend                                                               |
 |----------------------------------------------------------|-----------------------------------------------------------------------|
-|cloudide.command.executeCommand('command_id', ...args)    |plugin.call('cloudide.command.executeCommand', ...args)                |
-|cloudide.window.showInformationMessage('hello world!')    |plugin.call('cloudide.window.showInformationMessage', 'hello world!')  |
+|codearts.command.executeCommand('command_id', ...args)    |plugin.call('codearts.command.executeCommand', ...args)                |
+|codearts.window.showInformationMessage('hello world!')    |plugin.call('codearts.window.showInformationMessage', 'hello world!')  |
 
 
 #### Dynamic Webview
-In some scenarios, we need to dynamically create views on the CloudIDE workbench. 
+In some scenarios, we need to dynamically create views on the workbench. 
 The feature of *dynamic webview* provides an approach to create webview programmatically in frontend.
 The dynamic views, plugin backend, and plugin main view have the ability to expose function to each other.
 
@@ -425,7 +425,7 @@ The remote call always return Promise, you can `await` or using `then` callback 
 
 Event subscription can be performed in the frontend and backend classes. The subscription APIs in the frontend and backend classes are different.
 
-For the backend, we can use the native CloudIDE API to subscribe to events. Here is an example of events subscription at backend.
+For the backend, we can use the native API to subscribe to events. Here is an example of events subscription at backend.
 ```typescript
 @exposable
 export class Backend extends AbstractBackend {
@@ -433,7 +433,7 @@ export class Backend extends AbstractBackend {
     public async run(): Promise<void> {
         // subscribe to file created event
         this.context.subscriptions.push(
-            cloudide.workspace.onDidCreateFiles((event) => {
+            codearts.workspace.onDidCreateFiles((event) => {
                 console.log(JSON.stringify(event));
             })
         );
@@ -449,7 +449,7 @@ However, **the event object received by the frontend is not the same as the even
 class Frontend extends AbstractFrontend {
 ...
     run(): void {
-        this.plugin.subscribeEvent(EventType.CLOUDIDE_WORKSPACE_ONDIDCREATEFILES, (type, evt) => {
+        this.plugin.subscribeEvent(EventType.WORKSPACE_ONDIDCREATEFILES, (type, evt) => {
             console.log(`${type}: ${JSON.stringify(evt)}`);
         });
     }
@@ -488,7 +488,7 @@ class Frontend extends AbstractFrontend {
 ***
 
 ### i18n and l10n
-Internationalization of CloudIDE plugin can be supported by adding internationalization setting files.
+Internationalization of plugin can be supported by adding internationalization setting files.
 
 #### Setting files
 By default, the plugin generator will generate `package.nls.json` and `package.nls.zh-cn.json` files .
@@ -499,9 +499,9 @@ By default, the plugin generator will generate `package.nls.json` and `package.n
 The value definition of the message can include placeholders '`{0} {1} {2}...`'. When using `this.plugin.localize(key, ..args)` method for localization, the placeholders can be replaced with the required values ​​through parameters.
 ```json
 {
-    "plugin.index.title": "Huawei CloudIDE demo plugin main page",
+    "plugin.index.title": "Huawei CodeArts demo plugin main page",
     "plugin.index.description": "This is the plugin frontend page",
-    "plugin.dynamicview.title": "Huawei CloudIDE demo plugin dynamic webview page",
+    "plugin.dynamicview.title": "Huawei CodeArts demo plugin dynamic webview page",
     "plugin.dynamicview.description": "This is the plugin frontend page created dynamically",
     "plugin.show.progress": "{0}% completed..."
 }

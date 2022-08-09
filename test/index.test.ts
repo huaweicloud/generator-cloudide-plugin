@@ -17,16 +17,16 @@ const backendZhNlsJsonFileContent = `{
 }`;
 
 const genericDefaultNlsJsonFileContent = `{
-    "plugin.index.title": "Huawei CloudIDE demo plugin main page",
+    "plugin.index.title": "Huawei CodeArts demo plugin main page",
     "plugin.index.description": "This is the plugin frontend page",
-    "plugin.dynamicview.title": "Huawei CloudIDE demo plugin dynamic webview page",
+    "plugin.dynamicview.title": "Huawei CodeArts demo plugin dynamic webview page",
     "plugin.dynamicview.description": "This is the plugin frontend page created dynamically"
 }`;
 
 const genericZhNlsJsonFileContent = `{
-    "plugin.index.title": "华为云IDE样例插件主页面",
+    "plugin.index.title": "华为云CodeArts样例插件主页面",
     "plugin.index.description": "这是插件的前端页面",
-    "plugin.dynamicview.title": "华为云IDE样例插件动态创建的插件页面",
+    "plugin.dynamicview.title": "华为云CodeArts样例插件动态创建的插件页面",
     "plugin.dynamicview.description": "这是一个动态创建的插件页面"
 }`;
 
