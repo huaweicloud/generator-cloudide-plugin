@@ -19,7 +19,7 @@ export function start(context: codearts.ExtensionContext) {
     const opts: WebviewOptions = {
         viewType: 'view_type_of_your_plugin_view',
         title: localize('plugin.index.title'),
-        targetArea: 'right',
+        targetArea: 'left',
         iconPath: 'resources/icons/plugin.svg',
         viewUrl: 'local:resources/page/index.<% if( engineOfTemplate === 'ejs' ) { %>ejs<% } else if( engineOfTemplate === 'pug' ) { %>pug<% } else { %>html<% } %>',
         preserveFocus: true,
