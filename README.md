@@ -457,7 +457,7 @@ class Frontend extends AbstractFrontend {
 }
 ```
 
-#### * Event Publication
+#### * ~~Event Publication~~(removed)
 
 In some scenarios, we need to broadcast events to other plugins or subscribe to broadcast events from plugins. 
 For backend, here is the example of how to broadcast your own event.
