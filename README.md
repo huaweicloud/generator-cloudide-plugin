@@ -41,7 +41,7 @@ All of this article is based on a webview project that can be created by executi
 * The plugin supports directly calling the exposed methods between the frontend and backend, and returns Promise, without directly using `postMessage` for message sending.
 * Multi-view support, support for dynamically creating and destroying webviews, and direct calling of methods exposed between them.
 * Support for event subscription of IDE at the frontend.
-* Support event broadcasting between plugins.
+* ~~Support event broadcasting between plugins.~~(removed)
 
 ***
 
