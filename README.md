@@ -19,7 +19,7 @@ yo @codearts/plugin
 ### Build Your Plugin
 After runing the following command, a plugin file ending with `.carts` will be generated in the project root directory
 ```bash
-npm i && npm run pack
+npm i && npm run package
 ```
 
 ## Plugin Development Guides
