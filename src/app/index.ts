@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2020. Huawei Technologies Co., Ltd. All rights reserved.
+ * Copyright (C) 2022. Huawei Technologies Co., Ltd. All rights reserved.
  * SPDX-License-Identifier: MIT
  ********************************************************************************/
 
@@ -74,8 +74,7 @@ class CloudIdeGenerator extends Generator {
                 message: `Which template engine do you want to enable?`,
                 choices: [
                     {
-                        name:
-                            'None - No template engine is enabled, only html tag can be supported, i18n in plugin page will not be supported.',
+                        name: 'None - No template engine is enabled, only html tag can be supported, i18n in plugin page will not be supported.',
                         value: 'none'
                     },
                     {

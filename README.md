@@ -142,7 +142,7 @@ export function start(context: codearts.ExtensionContext) {
         })
     );
 
-    Plugin.createOrShow(context, opts, backends);
+    Plugin.create(context, opts, backends);
 }
 
 /**
@@ -202,6 +202,44 @@ After completing the basic configuration, we defined an array named `backends` t
 All backend classes that need to expose methods to the frontend should inherit the backend abstract class named `AbstractBackend`. 
 We have implemented a Backend class by default, and we usually just need to implement your backend program in this class.
 If you want to implement your own backend class, you can refer to the implementation of the default `Backend` class and add it to the array.
+The `Plugin` class provide three main API:
+**Plugin.create**
+```typescript
+    /**
+     * Initialize plugin and backend classes.
+     * @param context plugin context private to plugin.
+     * @param opts plugin main page options, create a webview panel when plugin start.
+     * @param backends all backends that need to be initialized, notice that backends can only be initialized once.
+     */
+    public static create(
+        context: cloudide.ExtensionContext,
+        opts?: WebviewOptions,
+        backends?: IBackendConstructor<AbstractBackend>[]
+    ): Plugin
+```
+
+**Plugin.createWebviewPanel**
+```typescript
+    /**
+     * create webview with messaging protocol support
+     * @param opts create webview by WebviewOptions
+     * @returns webviewpanel with messaging support
+     */
+    public createWebviewPanel(opts: WebviewOptions, override?: boolean): BaseWebviewPanel | undefined
+```
+
+**Plugin.createWebviewViewDialog**
+```
+    /**
+     * Create dialog that contains a webview with messaging protocol support
+     * @param opts dialog options
+     * @returns cloudide.Disposable
+     */
+    public createWebviewViewDialog(opts: WebviewOptions & cloudide.DialogOptions): cloudide.Disposable
+```
+
+Notice: The `Plugin.create` API has a optional WebviewOptions parameter that can pass undefined in case that you don't want to crate a default plugin page.
+However, the backend class array can only passed once, invoke the create function for second time will not initialize the backen twice.
 
 #### Backend Class
 The backend classes are the facades responsible for interacting with the IDE and OS.
