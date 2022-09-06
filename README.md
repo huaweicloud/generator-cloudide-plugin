@@ -203,7 +203,7 @@ All backend classes that need to expose methods to the frontend should inherit t
 We have implemented a Backend class by default, and we usually just need to implement your backend program in this class.
 If you want to implement your own backend class, you can refer to the implementation of the default `Backend` class and add it to the array.
 The `Plugin` class provide three main API:
-**Plugin.create**
+**Plugin.create**: static mehtod for initializing the plugin instance
 ```typescript
     /**
      * Initialize plugin and backend classes.
@@ -218,7 +218,7 @@ The `Plugin` class provide three main API:
     ): Plugin
 ```
 
-**Plugin.createWebviewPanel**
+**Plugin.createWebviewPanel**: public method for creating a webview panel with messaging protocol support 
 ```typescript
     /**
      * create webview with messaging protocol support
@@ -228,8 +228,8 @@ The `Plugin` class provide three main API:
     public createWebviewPanel(opts: WebviewOptions, override?: boolean): BaseWebviewPanel | undefined
 ```
 
-**Plugin.createWebviewViewDialog**
-```
+**Plugin.createWebviewViewDialog**: public method for creating a webview Dialog with messaging protocol suppport
+```typescript
     /**
      * Create dialog that contains a webview with messaging protocol support
      * @param opts dialog options
