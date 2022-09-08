@@ -59,7 +59,7 @@ class CloudIdeGenerator extends Generator {
                         value: 'simple'
                     },
                     {
-                        name: 'Plugin with webview panel',
+                        name: 'Plugin with exposable webview panel and dialog support',
                         value: 'webview'
                     }
                 ]
