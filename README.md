@@ -55,7 +55,7 @@ For the backend, all backend classes are restricted to the same scope called *ba
 When making a remote call to other scope, we should specify the scope before the identifier.
 ***If no scope is specified, the backend is called by default when the frontend calls the remote function,
 and the plugin main page fronted is called by default when the backend calls the remote function.***
-For more examples, see [Dynamic Webview](#dynamic-webview). 
+For more examples, see [Add Webview](#add-webview). 
 
 ***
 
@@ -367,7 +367,7 @@ In the backend, we can directly use the imported codearts module to call the API
 In order to allow the frontend to directly call these APIs, we expose all the APIs of the codearts module by default, so we can directly call them through `plugin.call()` on the frontend.
 For the backend API call `codearts.window.showInformationMessage('hello world!')`, We can use `plugin.call('codearts.window.showInformationMessage', 'hello world!')` in the frontend. 
 The first parameter is the name of the API to be called, and the following parameters will be used as the parameters of the API call.
-Here we make a comparison of two commonly used APIs：([Full API](https://github.com/huaweicloud/cloudide-plugin-api/blob/master/docs/modules/_index_d_._plugin_.md))
+Here we make a comparison of two commonly used APIs：([Full API](https://github.com/huaweicloud/cloudide-plugin-api/blob/codearts/docs/modules/_codearts_plugin_.md))
 |backend                                                   |frontend                                                               |
 |----------------------------------------------------------|-----------------------------------------------------------------------|
 |codearts.command.executeCommand('command_id', ...args)    |plugin.call('codearts.command.executeCommand', ...args)                |
