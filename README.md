@@ -239,7 +239,7 @@ The `Plugin` class provide three main API:
 ```
 
 Notice: The `Plugin.create` API has a optional WebviewOptions parameter that can pass undefined in case that you don't want to crate a default plugin page.
-However, the backend class array can only passed once, invoke the create function for second time will not initialize the backen twice.
+However, the backend class array can be only passed once, invoke the create function for second time will not initialize the backen twice.
 
 #### Backend Class
 The backend classes are the facades responsible for interacting with the IDE and OS.
@@ -374,13 +374,14 @@ Here we make a comparison of two commonly used APIs：([Full API](https://github
 |codearts.window.showInformationMessage('hello world!')    |plugin.call('codearts.window.showInformationMessage', 'hello world!')  |
 
 
-#### Dynamic Webview
+#### Add Webview
 In some scenarios, we need to dynamically create views on the workbench. 
-The feature of *dynamic webview* provides an approach to create webview programmatically in frontend.
-The dynamic views, plugin backend, and plugin main view have the ability to expose function to each other.
+The *createWebviewPanel()* API provides an approach to create webview programmatically in backend or frontend.
+The webviews, plugin backend, and plugin main view have the ability to expose function to each other.
 
-Dynamic webview can be added in 5 steps:
-* step 1: Create a dynamic webview html page in `resources/page/` just like the default dynamic-webivew.html. 
+webview can be added in 5 steps:
+* step 1: Create a dyncamic webview html page in `resources/page/` just like the default dynamic-webivew.html
+(In fact, there is no difference between dyncamic webview page and the main page).
 You can copy the dynamic-webview.html file and rename it as you like. For example, `your-dynamic-webviw.html`
 * step 2: Create your frontend file in `src/browser/` just like the default dynamic-webview.ts.
 You can copy the dynamic-webview.ts file and rename it as you like. For example, `your-dynamic-webview.ts`
@@ -395,7 +396,7 @@ module.exports = {
     ...
 };
 ```
-* step 4: Change the src attribute to your compiled js entry.
+* step 4: Change the src attribute to your compiled js entry in your html page or template.
 ```html
 <head>
     ...
@@ -403,7 +404,7 @@ module.exports = {
     ...
 </head>
 ```
-* setp 5: Call `plugin.createDynamicWebview()` to create the dynamic webview, `opts` passed to the
+* setp 5: Call `plugin.createWebviewPanel()` to create the dynamic webview, `opts` passed to the
 create function is a type of `WebviewOptions`, you should change the properties to your dynamic view.
 ```typescript
     run(): void {
@@ -417,7 +418,7 @@ create function is a type of `WebviewOptions`, you should change the properties 
                 preserveFocus: false,
                 extData: { data: 'my "extra" data' }
         };
-        this.plugin.createDynamicWebview(dynamicWebviewOpts, true);
+        this.plugin.createWebviewPanel(dynamicWebviewOpts, true);
        ...
     }
 ```
@@ -526,9 +527,9 @@ class Frontend extends AbstractFrontend {
 ***
 
 ### i18n and l10n
-Internationalization of plugin can be supported by adding internationalization setting files.
+Internationalization of plugin can be supported by adding internationalization message bundle files.
 
-#### Setting files
+#### Bundle files
 By default, the plugin generator will generate `package.nls.json` and `package.nls.zh-cn.json` files .
 
 `package.nls.json`: This file is the default setting file. If the translation file needed by the current locale cannot be found, this file is used by default.

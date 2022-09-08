@@ -49,8 +49,9 @@
         "watch": "tsc -watch",
         "compile": "tsc",
         "package": "codearts-pack -p",<% if(type == 'webview') { %>
-        "build": "npm run format-code && npm run compile && webpack",
-        "build-browser": "webpack --config webpack.config.js"<% } else { %>
+        "build": "npm run format-code && npm run compile && npm run build-browser",
+        "build-browser": "webpack --config webpack.config.js",
+        "watch-browser": "webpack --config webpack.config.js --watch"<% } else { %>
         "build": "npm run format-code && npm run compile"<% } %>
     },
     "engines": {
