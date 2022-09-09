@@ -239,7 +239,7 @@ The `Plugin` class provide three main API:
 ```
 
 Notice: The `Plugin.create` API has a optional WebviewOptions parameter that can pass undefined in case that you don't want to crate a default plugin page.
-However, the backend class array can be only passed once, invoke the create function for second time will not initialize the backen twice.
+However, the backend class array can be only passed once, invoke the create function for second time will not initialize the backends twice.
 
 #### Backend Class
 The backend classes are the facades responsible for interacting with the IDE and OS.
