@@ -1,4 +1,3 @@
 .plugin-body {
-    padding: 0 5px;
-    background-color: var(--theia-sideBar-background);
+    display: contents;
 }
