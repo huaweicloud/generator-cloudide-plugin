@@ -5,7 +5,7 @@ import { PluginPage, AbstractFrontend } from '@codearts/core/lib/browser/plugin-
 import { exposable, expose } from '@cloudide/messaging';
 
 /**
- * Adding your fronted api in this class
+ * Adding your frontend api in this class
  * Using '@expose' to expose your function to backend
  */
 @exposable
