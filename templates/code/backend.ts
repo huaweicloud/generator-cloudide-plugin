@@ -24,7 +24,7 @@ export class Backend extends AbstractBackend {
      * In this function you can call function exposed by frontend 
      */
     public async run(): Promise<void> {
-        const retValue = await this.plugin.call('myplugin.page.myApi', 'this is a function call from backend');
+        const retValue = await this.plugin.call('view_type_of_your_plugin_view::myplugin.page.myApi', 'this is a function call from backend');
         this.plugin.log(LogLevel.INFO, retValue);
     }
 
