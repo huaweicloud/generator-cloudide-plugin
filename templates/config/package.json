@@ -31,8 +31,8 @@
         "@codearts/plugin": "latest",
         "@codearts/plugin-packager": "latest",
         "rimraf": "2.6.2",
-        "ts-loader": "^6.0.4",
-        "typescript": "^3.9.7",
+        "ts-loader": "^8.3.0",
+        "typescript": "^4.4.0",
         "typescript-formatter": "7.2.2"<% if(type == 'webview') { %>,
         "webpack": "^4.39.2",
         "webpack-cli": "^3.3.7"<% } %>
