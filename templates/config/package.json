@@ -15,7 +15,7 @@
         "src"
     ],
     "main": "dist/plugin.js",
-    "activationEvents": [<% if(type == 'webview') { %>
+    "activationEvents": [<% if(type === 'webview' || type === 'project-wizard') { %>
         "*"<% } else { %> 
         "onCommand:plugin.sayHello"<% } %>
     ],<% if(type == 'simple') { %>
@@ -33,12 +33,12 @@
         "rimraf": "2.6.2",
         "ts-loader": "^8.3.0",
         "typescript": "^4.4.0",
-        "typescript-formatter": "7.2.2"<% if(type == 'webview') { %>,
+        "typescript-formatter": "7.2.2"<% if(type === 'webview' || type== 'project-wizard') { %>,
         "webpack": "^4.39.2",
         "webpack-cli": "^3.3.7"<% } %>
     },
     "dependencies": {
-        "@cloudide/nls": "latest"<% if(type == 'webview') { %>,
+        "@cloudide/nls": "latest"<% if(type === 'webview' || type === 'project-wizard') { %>,
         "@codearts/core": "latest",
         "@cloudide/messaging": "latest"<% } %>
     },
@@ -48,7 +48,7 @@
         "format-code": "tsfmt -r",
         "watch": "tsc -watch",
         "compile": "tsc",
-        "package": "codearts-pack -p",<% if(type == 'webview') { %>
+        "package": "codearts-pack -p",<% if(type === 'webview' || type === 'project-wizard') { %>
         "build": "npm run format-code && npm run compile && npm run build-browser",
         "build-browser": "webpack --config webpack.config.js",
         "watch-browser": "webpack --config webpack.config.js --watch"<% } else { %>

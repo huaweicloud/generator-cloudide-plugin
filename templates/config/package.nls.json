@@ -1,4 +1,4 @@
-<% if(type == 'webview') { %>{
+<% if(type === 'webview' || type === 'project-wizard') { %>{
     "plugin.index.title": "Huawei CodeArts demo plugin main page",
     "plugin.index.description": "This is the plugin frontend page",
     "plugin.dynamicview.title": "Huawei CodeArts demo plugin dynamic webview page",

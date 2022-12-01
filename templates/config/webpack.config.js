@@ -2,8 +2,8 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        'page/dist/index': './src/browser/frontend.ts',
-        'page/dist/dynamic-webview-index': './src/browser/dynamic-webview.ts'
+        'page/dist/index': './src/browser/frontend.ts',<% if (type == 'webview') { %>
+        'page/dist/dynamic-webview-index': './src/browser/dynamic-webview.ts'<% } %>
     },
     mode: 'development',
     module: {

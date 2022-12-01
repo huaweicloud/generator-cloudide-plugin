@@ -59,15 +59,19 @@ class CloudIdeGenerator extends Generator {
                         value: 'simple'
                     },
                     {
-                        name: 'Plugin with exposable webview panel and dialog support',
+                        name: 'Plugin with exposable webview and dialog support',
                         value: 'webview'
+                    },
+                    {
+                        name: 'Plugin to register a project wizard',
+                        value: 'project-wizard'
                     }
                 ]
             });
             opts.type = answers.type;
         }
 
-        if (opts.type === 'webview' && !opts.engineOfTemplate) {
+        if ((opts.type === 'webview' || this.options.type === 'project-wizard') && !opts.engineOfTemplate) {
             const answers = await this.prompt({
                 type: 'list',
                 name: 'engineOfTemplate',
@@ -206,7 +210,7 @@ class CloudIdeGenerator extends Generator {
             templateData
         );
 
-        if (this.options.type === 'webview') {
+        if (this.options.type === 'webview' || this.options.type === 'project-wizard') {
             // generate backend file
             this.fs.copyTpl(
                 this.templatePath(`code/backend.ts`),
@@ -222,12 +226,14 @@ class CloudIdeGenerator extends Generator {
                 templateData
             );
 
-            // generate dynamic-webview.ts
-            this.fs.copyTpl(
-                this.templatePath(`code/dynamic-webview.ts`),
-                this.destinationPath(this.options.name, 'src/browser/dynamic-webview.ts'),
-                templateData
-            );
+            if (this.options.type === 'webview') {
+                // generate dynamic-webview.ts
+                this.fs.copyTpl(
+                    this.templatePath(`code/dynamic-webview.ts`),
+                    this.destinationPath(this.options.name, 'src/browser/dynamic-webview.ts'),
+                    templateData
+                );
+            }
 
             // generate webpack config file
             this.fs.copyTpl(
