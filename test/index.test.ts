@@ -232,4 +232,58 @@ describe('test generate project', () => {
                 done(err);
             });
     });
+
+    it('generate project wizard project - ejs template engine', (done: Done) => {
+        const promptsAnswer = {
+            type: 'project-wizard',
+            engineOfTemplate: 'ejs',
+            publisher: 'tester',
+            author: 'tester',
+            license: 'MIT',
+            description: 'this is a test case',
+            repository: false
+        };
+        const projectName = 'project-wizard-project';
+        helpers
+            .run(path.join(__dirname, '../generators/app'))
+            .withArguments([projectName])
+            .withPrompts(promptsAnswer)
+            .then(() => {
+                assert.file([
+                    `${projectName}/package.json`,
+                    `${projectName}/package.nls.json`,
+                    `${projectName}/package.nls.zh-cn.json`,
+                    `${projectName}/LICENSE`,
+                    `${projectName}/tsconfig.json`,
+                    `${projectName}/tsfmt.json`,
+                    `${projectName}/webpack.config.js`,
+                    `${projectName}/resources/icons/logo.png`,
+                    `${projectName}/resources/icons/plugin.svg`,
+                    `${projectName}/resources/page/index.ejs`,
+                    `${projectName}/resources/page/css/default.css`,
+                    `${projectName}/resources/page/css/main.css`,
+                    `${projectName}/src/browser/frontend.ts`,
+                    `${projectName}/src/node/backend.ts`,
+                    `${projectName}/src/plugin.ts`,
+                    `${projectName}/README.md`,
+                    `${projectName}/.arts/launch.json`,
+                    `${projectName}/.arts/tasks.json`
+                ]);
+                assert.noFile(`${projectName}/resources/page/dynamic-webview.ejs`);
+                assert.noFile(`${projectName}/src/browser/dynamic-webview.ts`);
+                const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
+                assert.equal(packageJson.name, projectName);
+                assert.equal(packageJson.publisher, promptsAnswer.publisher);
+                assert.equal(packageJson.author, promptsAnswer.author);
+                assert.equal(packageJson.description, promptsAnswer.description);
+                assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
+                assert.fileContent(`${projectName}/LICENSE`, /^The MIT License/);
+                assert.fileContent(`${projectName}/package.nls.json`, genericDefaultNlsJsonFileContent);
+                assert.fileContent(`${projectName}/package.nls.zh-cn.json`, genericZhNlsJsonFileContent);
+                done();
+            })
+            .catch((err) => {
+                done(err);
+            });
+    });
 });

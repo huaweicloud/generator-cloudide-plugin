@@ -251,10 +251,13 @@ class CloudIdeGenerator extends Generator {
                     this.destinationPath(this.options.name, 'resources/page/ejs/index.ejs'),
                     this.destinationPath(this.options.name, 'resources/page/index.ejs')
                 );
-                this.fs.move(
-                    this.destinationPath(this.options.name, 'resources/page/ejs/dynamic-webview.ejs'),
-                    this.destinationPath(this.options.name, 'resources/page/dynamic-webview.ejs')
-                );
+                if (this.options.type === 'webview') {
+                    this.fs.move(
+                        this.destinationPath(this.options.name, 'resources/page/ejs/dynamic-webview.ejs'),
+                        this.destinationPath(this.options.name, 'resources/page/dynamic-webview.ejs')
+                    );
+                }
+
                 this.fs.delete(this.destinationPath(this.options.name, 'resources/page/ejs'));
             } else if (this.options.engineOfTemplate === 'pug') {
                 this.fs.delete(this.destinationPath(this.options.name, 'resources/page/html'));
@@ -263,10 +266,13 @@ class CloudIdeGenerator extends Generator {
                     this.destinationPath(this.options.name, 'resources/page/pug/index.pug'),
                     this.destinationPath(this.options.name, 'resources/page/index.pug')
                 );
-                this.fs.move(
-                    this.destinationPath(this.options.name, 'resources/page/pug/dynamic-webview.pug'),
-                    this.destinationPath(this.options.name, 'resources/page/dynamic-webview.pug')
-                );
+                if (this.options.type === 'webview') {
+                    this.fs.move(
+                        this.destinationPath(this.options.name, 'resources/page/pug/dynamic-webview.pug'),
+                        this.destinationPath(this.options.name, 'resources/page/dynamic-webview.pug')
+                    );
+                }
+
                 this.fs.delete(this.destinationPath(this.options.name, 'resources/page/pug'));
             } else {
                 this.fs.delete(this.destinationPath(this.options.name, 'resources/page/pug'));
@@ -275,10 +281,13 @@ class CloudIdeGenerator extends Generator {
                     this.destinationPath(this.options.name, 'resources/page/html/index.html'),
                     this.destinationPath(this.options.name, 'resources/page/index.html')
                 );
-                this.fs.move(
-                    this.destinationPath(this.options.name, 'resources/page/html/dynamic-webview.html'),
-                    this.destinationPath(this.options.name, 'resources/page/dynamic-webview.html')
-                );
+                if (this.options.type === 'webview') {
+                    this.fs.move(
+                        this.destinationPath(this.options.name, 'resources/page/html/dynamic-webview.html'),
+                        this.destinationPath(this.options.name, 'resources/page/dynamic-webview.html')
+                    );
+                }
+
                 this.fs.delete(this.destinationPath(this.options.name, 'resources/page/html'));
             }
         }
