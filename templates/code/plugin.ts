@@ -1,7 +1,7 @@
 <%- include(`../common/LICENSE-${license}-HEADER`, {year: year, author: author}); %>
 
 import * as codearts from '@codearts/plugin';
-import { initNlsConfig<% if(type === 'webview') { %>, localize<% } %> } from '@cloudide/nls';<% if(type === 'webview') { %>
+import { initNlsConfig<% if(type === 'webview' || type === 'simple') { %>, localize<% } %> } from '@cloudide/nls';<% if(type === 'webview') { %>
 import { WebviewOptions } from '@codearts/core/lib/common/plugin-common';
 import { Plugin } from '@codearts/core/lib/node/plugin-api';
 import { Backend } from './node/backend';
