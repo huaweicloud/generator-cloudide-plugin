@@ -26,7 +26,7 @@ npm i && npm run package
 
 > [Full API References](https://github.com/huaweicloud/cloudide-plugin-api/blob/codearts/docs/modules/_codearts_plugin_.md)
 
-> [Examples](https://github.com/HuaweiIDE)
+> [Examples](https://github.com/orgs/HuaweiIDE/repositories?q=codearts&type=all&language=&sort=)
 
 ***
 
