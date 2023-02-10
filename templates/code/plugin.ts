@@ -1,7 +1,7 @@
 <%- include(`../common/LICENSE-${license}-HEADER`, {year: year, author: author}); %>
 
 import * as codearts from '@codearts/plugin';
-import { initNlsConfig<% if(type === 'webview' || type === 'simple') { %>, localize<% } %> } from '@cloudide/nls';<% if(type === 'webview') { %>
+import { localize } from '@cloudide/nls';<% if(type === 'webview') { %>
 import { WebviewOptions } from '@codearts/core/lib/common/plugin-common';
 import { Plugin } from '@codearts/core/lib/node/plugin-api';
 import { Backend } from './node/backend';
@@ -10,11 +10,6 @@ import { Backend } from './node/backend';
  * Plugin activation entry point, this function is called when plugin is loaded.
  */
 export function start(context: codearts.ExtensionContext) {
-
-    /**
-     *  Initialize language settings.
-     */
-    initNlsConfig(context.extensionPath);
 
     const opts: WebviewOptions = {
         viewType: 'view_type_of_your_plugin_view',
@@ -51,11 +46,6 @@ export function stop(context: codearts.ExtensionContext) {
 export function start(context: codearts.ExtensionContext) {
 
     /**
-     *  Initialize language settings.
-     */
-    initNlsConfig(context.extensionPath);
-
-    /**
      * Register a command for the plugin.
      */
     context.subscriptions.push(
@@ -80,12 +70,7 @@ export function stop(context: codearts.ExtensionContext) {
      * Plugin activation entry point, this function is called when plugin is loaded.
      */
     export function start(context: codearts.ExtensionContext) {
-    
-        /**
-         *  Initialize language settings.
-         */
-        initNlsConfig(context.extensionPath);
-    
+
         /**
          * The backend class that needs to be loaded, the classes in the array must inherit AbstractBackend.
          * Usually you only need to add the methods you want to expose to the frontend in the backen.ts and implement the plugin function in the run method.
@@ -95,7 +80,7 @@ export function stop(context: codearts.ExtensionContext) {
     
         Plugin.create(context, undefined, backends);
     }
-    
+
     /**
      * The method that is called when the plugin is stopped. 
      * If you need to customize the clean-up action that the plug-in stops, you can add it to the method.
