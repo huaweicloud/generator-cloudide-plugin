@@ -13,6 +13,7 @@
             "es6",
             "dom"
         ],
+        "skipLibCheck": true,
         "sourceMap": true,
         "rootDir": "src",
         "outDir": "dist"
