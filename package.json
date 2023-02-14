@@ -46,6 +46,6 @@
         "typescript": "^3.9.7",
         "typescript-formatter": "7.2.2",
         "yeoman-assert": "^3.1.1",
-        "yeoman-test": "^2.7.0"
+        "yeoman-test": "^7.3.0"
     }
 }
