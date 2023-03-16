@@ -183,7 +183,8 @@ class CloudIdeGenerator extends Generator {
             publisher: this.options.publisher,
             author: this.options.author,
             license: this.options.license,
-            description: this.options.description
+            description: this.options.description,
+            version: this.options.version
         };
 
         // copy project setting files

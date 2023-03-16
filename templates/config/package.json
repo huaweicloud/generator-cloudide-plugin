@@ -6,7 +6,7 @@
         "cloudide",
         "plugin"
     ],
-    "version": "0.0.1",
+    "version": "<%= version %>",
     "license": "SEE LICENSE IN LICENSE",
     "description": "<%= description %>",
     "displayName": "<%= name %>",
