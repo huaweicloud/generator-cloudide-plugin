@@ -339,10 +339,13 @@ class CloudIdeGenerator extends Generator {
     install() {
         this.log('installing dependencies...');
         const pluginTargetPath = this.destinationPath(this.options.name);
-        this.npmInstall(undefined, undefined, { cwd: pluginTargetPath });
-        this.log(
-            `If an error occurs during the installation process, please try to execute command 'npm i' in the directory '${pluginTargetPath}'.`
-        );
+        try {
+            this.spawnCommandSync('npm install', [], { cwd: pluginTargetPath });
+        } catch (error) {
+            this.log(
+                `If an error occurs during the installation process, please try to execute command 'npm i' in the directory '${pluginTargetPath}'.`
+            );
+        }
         if (this.options.repository === 'YES') {
             this.spawnCommandSync('git', ['init'], { cwd: pluginTargetPath });
         }
