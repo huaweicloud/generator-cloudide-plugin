@@ -1,6 +1,6 @@
 {
     "name": "@codearts/generator-plugin",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "description": "Generator of Huawei CodeArts plugin",
     "main": "index.js",
     "files": [
@@ -27,14 +27,14 @@
     },
     "dependencies": {
         "ts-node": "^8.10.2",
-        "yeoman-generator": "^4.10.1",
+        "yeoman-generator": "^5.8.0",
         "yosay": "^2.0.2"
     },
     "devDependencies": {
         "@types/mocha": "^8.0.2",
         "@types/yeoman-assert": "^3.1.1",
-        "@types/yeoman-generator": "^3.1.4",
-        "@types/yeoman-test": "^2.0.4",
+        "@types/yeoman-generator": "^5.2.11",
+        "@types/yeoman-test": "^4.0.3",
         "@types/yosay": "^0.0.29",
         "@typescript-eslint/eslint-plugin": "^3.6.1",
         "@typescript-eslint/parser": "^3.6.1",
@@ -46,6 +46,6 @@
         "typescript": "^4.7.4",
         "typescript-formatter": "7.2.2",
         "yeoman-assert": "^3.1.1",
-        "yeoman-test": "^2.7.0"
+        "yeoman-test": "^7.4.0"
     }
 }

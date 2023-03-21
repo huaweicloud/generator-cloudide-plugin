@@ -3,7 +3,7 @@
     "publisher": "<%= publisher %>",
     "author": "<%= author %>",
     "keywords": [
-        "cloudide",
+        "codearts ide",
         "plugin"
     ],
     "version": "<%= version %>",
