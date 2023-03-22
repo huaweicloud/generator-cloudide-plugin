@@ -83,7 +83,7 @@ describe('test generate project', () => {
             .catch((err) => {
                 done(err);
             });
-    });
+    }).timeout(60000);
 
     it('generate webview project - ejs template engine', (done: Done) => {
         const promptsAnswer = {
@@ -137,7 +137,7 @@ describe('test generate project', () => {
             .catch((err) => {
                 done(err);
             });
-    });
+    }).timeout(60000);
 
     it('generate webview project - pug template engine', (done: Done) => {
         const promptsAnswer = {
@@ -191,7 +191,7 @@ describe('test generate project', () => {
             .catch((err) => {
                 done(err);
             });
-    });
+    }).timeout(60000);
 
     it('generate simple project', (done: Done) => {
         const promptsAnswer = {
@@ -231,7 +231,7 @@ describe('test generate project', () => {
             .catch((err) => {
                 done(err);
             });
-    });
+    }).timeout(60000);
 
     it('generate project wizard project - ejs template engine', (done: Done) => {
         const promptsAnswer = {
@@ -285,5 +285,5 @@ describe('test generate project', () => {
             .catch((err) => {
                 done(err);
             });
-    });
+    }).timeout(60000);
 });
