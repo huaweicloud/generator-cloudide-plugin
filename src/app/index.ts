@@ -211,6 +211,34 @@ class CloudIdeGenerator extends Generator {
             templateData
         );
 
+        // generate extension test source file
+        this.fs.copyTpl(
+            this.templatePath(`test/example.ts`),
+            this.destinationPath(this.options.name, 'src/test/example.ts'),
+            templateData
+        );
+
+        // generate extension test file
+        this.fs.copyTpl(
+            this.templatePath(`test/extension.test.ts`),
+            this.destinationPath(this.options.name, 'src/test/suite/extension.test.ts'),
+            templateData
+        );
+
+        // generate extension index file
+        this.fs.copyTpl(
+            this.templatePath(`test/index.ts`),
+            this.destinationPath(this.options.name, 'src/test/suite/index.ts'),
+            templateData
+        );
+
+        // generate runTest file
+        this.fs.copyTpl(
+            this.templatePath(`test/runTest.ts`),
+            this.destinationPath(this.options.name, 'src/test/runTest.ts'),
+            templateData
+        );
+
         if (this.options.type === 'webview' || this.options.type === 'project-wizard') {
             // generate backend file
             this.fs.copyTpl(
