@@ -188,7 +188,16 @@ class CloudIdeGenerator extends Generator {
         };
 
         // copy project setting files
-        this.fs.copy(this.templatePath(`config/.arts`), this.destinationPath(this.options.name, '.arts'));
+        this.fs.copyTpl(
+            this.templatePath(`config/.arts/launch.json`),
+            this.destinationPath(this.options.name, '.arts/launch.json'),
+            templateData
+        );
+        this.fs.copyTpl(
+            this.templatePath(`config/.arts/tasks.json`),
+            this.destinationPath(this.options.name, '.arts/tasks.json'),
+            templateData
+        );
 
         // generate license file
         this.fs.copyTpl(
@@ -238,9 +247,20 @@ class CloudIdeGenerator extends Generator {
 
             // generate webpack config file
             this.fs.copyTpl(
-                this.templatePath(`config/webpack.config.js`),
-                this.destinationPath(this.options.name, 'webpack.config.js'),
+                this.templatePath(`config/webpack.config.node.js`),
+                this.destinationPath(this.options.name, 'webpack.config.node.js'),
                 templateData
+            );
+            this.fs.copyTpl(
+                this.templatePath(`config/webpack.config.browser.js`),
+                this.destinationPath(this.options.name, 'webpack.config.browser.js'),
+                templateData
+            );
+
+            // generate pack-config.json
+            this.fs.copy(
+                this.templatePath(`config/pack-config.json`),
+                this.destinationPath(this.options.name, 'pack-config.json')
             );
 
             // copy resource files

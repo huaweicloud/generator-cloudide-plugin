@@ -50,9 +50,11 @@
         "compile": "tsc",
         "package": "cap package -p",
         "publish": "cap publish",<% if(type === 'webview' || type === 'project-wizard') { %>
-        "build": "npm run format-code && npm run compile && npm run build-browser",
-        "build-browser": "webpack --config webpack.config.js",
-        "watch-browser": "webpack --config webpack.config.js --watch"<% } else { %>
+        "build": "npm run format-code && npm run build-node && npm run build-browser",
+        "build-node": "webpack --config webpack.config.node.js",
+        "build-node-watch": "webpack --config webpack.config.node.js --watch",
+        "build-browser": "webpack --config webpack.config.browser.js",
+        "build-browser-watch": "webpack --config webpack.config.browser.js --watch"<% } else { %>
         "build": "npm run format-code && npm run compile"<% } %>
     },
     "engines": {
