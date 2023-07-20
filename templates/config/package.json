@@ -16,7 +16,7 @@
     ],
     "main": "dist/plugin.js",
     "activationEvents": [<% if(type === 'webview' || type === 'project-wizard') { %>
-        "*"<% } else { %> 
+        "onStartupFinished"<% } else { %> 
         "onCommand:plugin.sayHello"<% } %>
     ],<% if(type == 'simple') { %>
     "contributes": {
