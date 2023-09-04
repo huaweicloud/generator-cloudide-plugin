@@ -5,7 +5,7 @@ module.exports = {
         'page/dist/index': './src/browser/frontend.ts',<% if (type == 'webview') { %>
         'page/dist/dynamic-webview-index': './src/browser/dynamic-webview.ts'<% } %>
     },
-    mode: 'development',
+    mode: 'production',
     module: {
         rules: [
             {

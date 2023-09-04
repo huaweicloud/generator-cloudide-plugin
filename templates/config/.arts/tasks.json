@@ -1,9 +1,95 @@
 {
 	"version": "2.0.0",
-	"tasks": [
+	"tasks": [<% if(type === 'webview' || type === 'project-wizard') { %>
+		{
+			"type": "npm",
+			"script": "build-browser-watch",
+			"problemMatcher": [
+				{
+					"owner": "typescript",
+					"fileLocation": "absolute",
+					"pattern": [
+						{
+							"regexp": "\\[tsl\\] (ERROR|WARNING) in (.*)?\\((\\d+),(\\d+)\\)",
+							"severity": 1,
+							"file": 2,
+							"line": 3,
+							"column": 4
+						},
+						{
+							"regexp": "\\s*TS(\\d+):\\s*(.*)$",
+							"code": 1,
+							"message": 2
+						}
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": {
+							"regexp": "[Cc]ompiling.*?|[Cc]ompil(ation|er) .*?starting"
+						},
+						"endsPattern": {
+							"regexp": "[Cc]ompiled (.*?successfully|with .*?(error|warning))|[Cc]ompil(ation|er) .*?finished"
+						}
+					}
+				}
+			],
+			"isBackground": true,
+			"label": "npm: build-watch",
+			"detail": "npm run build-node-watch",
+			"dependsOn": ["npm: build-node-watch"]
+		},
+		{
+			"type": "npm",
+			"script": "build-node-watch",
+			"label": "npm: build-node-watch",
+			"detail": "npm run build-node-watch",
+			"isBackground": true,
+			"problemMatcher": [
+				{
+					"owner": "typescript",
+					"fileLocation": "absolute",
+					"pattern": [
+						{
+							"regexp": "\\[tsl\\] (ERROR|WARNING) in (.*)?\\((\\d+),(\\d+)\\)",
+							"severity": 1,
+							"file": 2,
+							"line": 3,
+							"column": 4
+						},
+						{
+							"regexp": "\\s*TS(\\d+):\\s*(.*)$",
+							"code": 1,
+							"message": 2
+						}
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": {
+							"regexp": "[Cc]ompiling.*?|[Cc]ompil(ation|er) .*?starting"
+						},
+						"endsPattern": {
+							"regexp": "[Cc]ompiled (.*?successfully|with .*?(error|warning))|[Cc]ompil(ation|er) .*?finished"
+						}
+					}
+				}
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"dependsOn": ["npm: format-code"]
+		},
+		{
+			"type": "npm",
+			"script": "format-code",
+			"isBackground": true,
+			"label": "npm: format-code",
+			"detail": "npm run format-code"
+		},<% } %>
 		{
 			"type": "npm",
 			"script": "watch",
+			"label": "npm: watch",
 			"problemMatcher": "$tsc-watch",
 			"isBackground": true,
 			"presentation": {

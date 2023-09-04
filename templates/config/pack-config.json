@@ -1,0 +1,6 @@
+{
+    "exclude": [
+        "pack-config.json",
+        "node_modules/*"
+    ]
+}

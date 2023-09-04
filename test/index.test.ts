@@ -30,6 +30,10 @@ const genericZhNlsJsonFileContent = `{
     "plugin.dynamicview.description": "这是一个动态创建的插件页面"
 }`;
 
+const simpleLaunchPreLaunchTask = 'npm: watch';
+
+const webViewLaunchPreLaunchTask = 'npm: build-watch';
+
 describe('test generate project', () => {
     it('generate webview project - no template engine', (done: Done) => {
         const promptsAnswer = {
@@ -54,7 +58,9 @@ describe('test generate project', () => {
                     `${projectName}/LICENSE`,
                     `${projectName}/tsconfig.json`,
                     `${projectName}/tsfmt.json`,
-                    `${projectName}/webpack.config.js`,
+                    `${projectName}/webpack.config.node.js`,
+                    `${projectName}/webpack.config.browser.js`,
+                    `${projectName}/pack-config.json`,
                     `${projectName}/resources/icons/logo.png`,
                     `${projectName}/resources/icons/plugin.svg`,
                     `${projectName}/resources/page/index.html`,
@@ -70,11 +76,16 @@ describe('test generate project', () => {
                     `${projectName}/.arts/tasks.json`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
+                const launchJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/launch.json`, 'utf8'));
+                const tasksJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/tasks.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
                 assert.equal(packageJson.publisher, promptsAnswer.publisher);
                 assert.equal(packageJson.author, promptsAnswer.author);
                 assert.equal(packageJson.description, promptsAnswer.description);
                 assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
+                assert.equal(launchJson.configurations[0].preLaunchTask, webViewLaunchPreLaunchTask);
+                assert.equal(tasksJson.tasks.length, 4);
+                assert.equal(tasksJson.tasks[0].label, webViewLaunchPreLaunchTask);
                 assert.fileContent(`${projectName}/LICENSE`, /^The MIT License/);
                 assert.fileContent(`${projectName}/package.nls.json`, genericDefaultNlsJsonFileContent);
                 assert.fileContent(`${projectName}/package.nls.zh-cn.json`, genericZhNlsJsonFileContent);
@@ -108,7 +119,9 @@ describe('test generate project', () => {
                     `${projectName}/LICENSE`,
                     `${projectName}/tsconfig.json`,
                     `${projectName}/tsfmt.json`,
-                    `${projectName}/webpack.config.js`,
+                    `${projectName}/webpack.config.node.js`,
+                    `${projectName}/webpack.config.browser.js`,
+                    `${projectName}/pack-config.json`,
                     `${projectName}/resources/icons/logo.png`,
                     `${projectName}/resources/icons/plugin.svg`,
                     `${projectName}/resources/page/index.ejs`,
@@ -124,11 +137,16 @@ describe('test generate project', () => {
                     `${projectName}/.arts/tasks.json`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
+                const launchJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/launch.json`, 'utf8'));
+                const tasksJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/tasks.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
                 assert.equal(packageJson.publisher, promptsAnswer.publisher);
                 assert.equal(packageJson.author, promptsAnswer.author);
                 assert.equal(packageJson.description, promptsAnswer.description);
                 assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
+                assert.equal(launchJson.configurations[0].preLaunchTask, webViewLaunchPreLaunchTask);
+                assert.equal(tasksJson.tasks.length, 4);
+                assert.equal(tasksJson.tasks[0].label, webViewLaunchPreLaunchTask);
                 assert.fileContent(`${projectName}/LICENSE`, /^The MIT License/);
                 assert.fileContent(`${projectName}/package.nls.json`, genericDefaultNlsJsonFileContent);
                 assert.fileContent(`${projectName}/package.nls.zh-cn.json`, genericZhNlsJsonFileContent);
@@ -162,7 +180,9 @@ describe('test generate project', () => {
                     `${projectName}/LICENSE`,
                     `${projectName}/tsconfig.json`,
                     `${projectName}/tsfmt.json`,
-                    `${projectName}/webpack.config.js`,
+                    `${projectName}/webpack.config.node.js`,
+                    `${projectName}/webpack.config.browser.js`,
+                    `${projectName}/pack-config.json`,
                     `${projectName}/resources/icons/logo.png`,
                     `${projectName}/resources/icons/plugin.svg`,
                     `${projectName}/resources/page/index.pug`,
@@ -178,11 +198,16 @@ describe('test generate project', () => {
                     `${projectName}/.arts/tasks.json`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
+                const launchJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/launch.json`, 'utf8'));
+                const tasksJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/tasks.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
                 assert.equal(packageJson.publisher, promptsAnswer.publisher);
                 assert.equal(packageJson.author, promptsAnswer.author);
                 assert.equal(packageJson.description, promptsAnswer.description);
                 assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
+                assert.equal(launchJson.configurations[0].preLaunchTask, webViewLaunchPreLaunchTask);
+                assert.equal(tasksJson.tasks.length, 4);
+                assert.equal(tasksJson.tasks[0].label, webViewLaunchPreLaunchTask);
                 assert.fileContent(`${projectName}/LICENSE`, /^The MIT License/);
                 assert.fileContent(`${projectName}/package.nls.json`, genericDefaultNlsJsonFileContent);
                 assert.fileContent(`${projectName}/package.nls.zh-cn.json`, genericZhNlsJsonFileContent);
@@ -219,11 +244,16 @@ describe('test generate project', () => {
                     `${projectName}/.arts/tasks.json`
                 ]);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
+                const launchJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/launch.json`, 'utf8'));
+                const tasksJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/tasks.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
                 assert.equal(packageJson.publisher, promptsAnswer.publisher);
                 assert.equal(packageJson.author, promptsAnswer.author);
                 assert.equal(packageJson.description, promptsAnswer.description);
                 assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
+                assert.equal(launchJson.configurations[0].preLaunchTask, simpleLaunchPreLaunchTask);
+                assert.equal(tasksJson.tasks.length, 1);
+                assert.equal(tasksJson.tasks[0].label, simpleLaunchPreLaunchTask);
                 assert.fileContent(`${projectName}/package.nls.json`, backendDefaultNlsJsonFileContent);
                 assert.fileContent(`${projectName}/package.nls.zh-cn.json`, backendZhNlsJsonFileContent);
                 done();
@@ -256,7 +286,9 @@ describe('test generate project', () => {
                     `${projectName}/LICENSE`,
                     `${projectName}/tsconfig.json`,
                     `${projectName}/tsfmt.json`,
-                    `${projectName}/webpack.config.js`,
+                    `${projectName}/webpack.config.node.js`,
+                    `${projectName}/webpack.config.browser.js`,
+                    `${projectName}/pack-config.json`,
                     `${projectName}/resources/icons/logo.png`,
                     `${projectName}/resources/icons/plugin.svg`,
                     `${projectName}/resources/page/index.ejs`,
@@ -272,11 +304,16 @@ describe('test generate project', () => {
                 assert.noFile(`${projectName}/resources/page/dynamic-webview.ejs`);
                 assert.noFile(`${projectName}/src/browser/dynamic-webview.ts`);
                 const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
+                const launchJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/launch.json`, 'utf8'));
+                const tasksJson = JSON.parse(fs.readFileSync(`${projectName}/.arts/tasks.json`, 'utf8'));
                 assert.equal(packageJson.name, projectName);
                 assert.equal(packageJson.publisher, promptsAnswer.publisher);
                 assert.equal(packageJson.author, promptsAnswer.author);
                 assert.equal(packageJson.description, promptsAnswer.description);
                 assert.equal(packageJson.license, 'SEE LICENSE IN LICENSE');
+                assert.equal(launchJson.configurations[0].preLaunchTask, webViewLaunchPreLaunchTask);
+                assert.equal(tasksJson.tasks.length, 4);
+                assert.equal(tasksJson.tasks[0].label, webViewLaunchPreLaunchTask);
                 assert.fileContent(`${projectName}/LICENSE`, /^The MIT License/);
                 assert.fileContent(`${projectName}/package.nls.json`, genericDefaultNlsJsonFileContent);
                 assert.fileContent(`${projectName}/package.nls.zh-cn.json`, genericZhNlsJsonFileContent);
