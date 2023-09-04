@@ -340,7 +340,7 @@ class CloudIdeGenerator extends Generator {
         this.log('installing dependencies...');
         const pluginTargetPath = this.destinationPath(this.options.name);
         try {
-            this.spawnCommandSync('npm install', [], { cwd: pluginTargetPath });
+            this.spawnCommandSync('npm install', [], { cwd: pluginTargetPath, shell: true });
         } catch (error) {
             this.log(
                 `If an error occurs during the installation process, please try to execute command 'npm i' in the directory '${pluginTargetPath}'.`
