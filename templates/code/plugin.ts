@@ -17,7 +17,7 @@ export function start(context: codearts.ExtensionContext) {
         targetArea: 'left',
         iconPath: 'resources/icons/plugin.svg',
         viewUrl: 'local:resources/page/index.<% if( engineOfTemplate === 'ejs' ) { %>ejs<% } else if( engineOfTemplate === 'pug' ) { %>pug<% } else { %>html<% } %>',
-        preserveFocus: true,
+        preserveFocus: false,
         templateEngine: <% if( engineOfTemplate === 'ejs' ) { %>'ejs'<% } else if( engineOfTemplate === 'pug' ) { %>'pug'<% } else { %>undefined<% } %>
     };
 
